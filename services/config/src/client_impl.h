@@ -30,6 +30,8 @@
 #ifndef __CLIENT_IMPL_H__
 #define __CLIENT_IMPL_H__
 
+#define VALIDATE_CONFIG_SWITCH 1
+
 #include <vendor/display/config/2.0/IDisplayConfig.h>
 #include <hidl/HidlSupport.h>
 #include <log/log.h>
@@ -62,6 +64,7 @@ class ClientCallback: public IDisplayConfigCallback {
                                const HandleStream &input_handles);
   void ParseNotifyCWBBufferDone(const ByteStream &input_params, const HandleStream &input_handles);
   void ParseNotifyQsyncChange(const ByteStream &input_params);
+  void ParseNotifyIdleStatus(const ByteStream &input_params);
   ConfigCallback *callback_ = nullptr;
 };
 
@@ -120,6 +123,8 @@ class ClientImpl : public ClientInterface {
   virtual int GetSupportedDisplayRefreshRates(DisplayType dpy,
                                               std::vector<uint32_t> *supported_refresh_rates);
   virtual int IsRCSupported(uint32_t disp_id, bool *supported);
+  virtual int ControlIdleStatusCallback(bool enable);
+  virtual int IsSupportedConfigSwitch(uint32_t disp_id, uint32_t config, bool *supported);
 
  private:
   android::sp<IDisplayConfig> display_config_ = nullptr;

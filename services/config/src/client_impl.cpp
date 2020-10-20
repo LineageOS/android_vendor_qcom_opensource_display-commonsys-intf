@@ -828,6 +828,19 @@ int ClientImpl::ControlQsyncCallback(bool enable) {
   return error;
 }
 
+int ClientImpl::ControlIdleStatusCallback(bool enable) {
+  ByteStream input_params;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&enable), sizeof(bool));
+  int32_t error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+
+  display_config_->perform(client_handle_, kControlIdleStatusCallback, input_params, {}, hidl_cb);
+
+  return error;
+}
+
 int ClientImpl::SendTUIEvent(DisplayType dpy, TUIEventType event_type) {
   struct TUIEventParams input = {dpy, event_type};
   ByteStream input_params;
@@ -913,6 +926,32 @@ int ClientImpl::IsRCSupported(uint32_t disp_id, bool *supported) {
   return error;
 }
 
+int ClientImpl::IsSupportedConfigSwitch(uint32_t disp_id, uint32_t config, bool *supported) {
+  struct SupportedModesParams input = {disp_id, config};
+  ByteStream input_params;
+  ByteStream output_params;
+  const bool *output;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&input),
+                             sizeof(struct SupportedModesParams));
+  int error = 0;
+  auto hidl_cb = [&error, &output_params] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+    output_params = params;
+  };
+
+  if (display_config_) {
+    display_config_->perform(client_handle_, kIsSupportedConfigSwitch, input_params, {}, hidl_cb);
+  }
+
+  if (!error) {
+    const uint8_t *data = output_params.data();
+    output = reinterpret_cast<const bool *>(data);
+    *supported = *output;
+  }
+
+  return error;
+}
+
 void ClientCallback::ParseNotifyCWBBufferDone(const ByteStream &input_params,
                                               const HandleStream &input_handles) {
   const int *error;
@@ -940,6 +979,17 @@ void ClientCallback::ParseNotifyQsyncChange(const ByteStream &input_params) {
                                qsync_data->qsync_refresh_rate);
 }
 
+void ClientCallback::ParseNotifyIdleStatus(const ByteStream &input_params) {
+  const bool *is_idle;
+  if (callback_ == nullptr || input_params.size() == 0) {
+    return;
+  }
+
+  const uint8_t *data = input_params.data();
+  is_idle = reinterpret_cast<const bool*>(data);
+  callback_->NotifyIdleStatus(*is_idle);
+}
+
 Return<void> ClientCallback::perform(uint32_t op_code, const ByteStream &input_params,
                                      const HandleStream &input_handles) {
   switch (op_code) {
@@ -948,6 +998,9 @@ Return<void> ClientCallback::perform(uint32_t op_code, const ByteStream &input_p
       break;
     case kControlQsyncCallback:
       ParseNotifyQsyncChange(input_params);
+      break;
+    case kControlIdleStatusCallback:
+      ParseNotifyIdleStatus(input_params);
       break;
     default:
       break;
