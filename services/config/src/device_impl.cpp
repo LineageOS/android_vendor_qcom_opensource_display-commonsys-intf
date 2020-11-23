@@ -102,8 +102,7 @@ Return<void> DeviceImpl::registerClient(const hidl_string &client_name,
   device_client->SetDeviceConfigIntf(intf);
 
   std::lock_guard<std::mutex> lock(death_service_mutex_);
-  ALOGI("Register client id: %lu name: %s device client: %p", client_handle, client_name.c_str(),
-        device_client.get());
+  ALOGI("Register client name: %s device client: %p", client_name.c_str(), device_client.get());
   display_config_map_.emplace(std::make_pair(client_handle, device_client));
   _hidl_cb(error, client_handle);
   return Void();
