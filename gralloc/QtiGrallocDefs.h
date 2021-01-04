@@ -164,6 +164,12 @@
 #define HAL_PIXEL_FORMAT_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR 0x93DC
 #define HAL_PIXEL_FORMAT_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR 0x93DD
 
+/*Legacy Colorspace values - Values maps to ColorSpace_t in qdMetadata.h*/
+#define HAL_CSC_ITU_R_601 0
+#define HAL_CSC_ITU_R_601_FR 1
+#define HAL_CSC_ITU_R_709 2
+#define HAL_CSC_ITU_R_2020 3
+#define HAL_CSC_ITU_R_2020_FR 4
 enum { BUFFER_TYPE_UI = 0, BUFFER_TYPE_VIDEO };
 
 #endif  //__QTIGRALLOCDEFS_H__
