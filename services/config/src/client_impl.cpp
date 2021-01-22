@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2020 The Linux Foundation. All rights reserved.
+* Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -983,6 +983,17 @@ int ClientImpl::GetDisplayType(uint64_t physical_disp_id, DisplayType *disp_type
   return error;
 }
 
+int ClientImpl::AllowIdleFallback() {
+  int error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+  if (display_config_) {
+    display_config_->perform(client_handle_, kAllowIdleFallback, {}, {}, hidl_cb);
+  }
+  return error;
+}
+
 void ClientCallback::ParseNotifyCWBBufferDone(const ByteStream &input_params,
                                               const HandleStream &input_handles) {
   const int *error;
@@ -1019,6 +1030,79 @@ void ClientCallback::ParseNotifyIdleStatus(const ByteStream &input_params) {
   const uint8_t *data = input_params.data();
   is_idle = reinterpret_cast<const bool*>(data);
   callback_->NotifyIdleStatus(*is_idle);
+}
+
+int ClientImpl::GetDisplayTileCount(uint64_t physical_disp_id, uint32_t *num_h_tiles,
+                                    uint32_t *num_v_tiles) {
+  if (!num_h_tiles || !num_v_tiles) {
+    return -EINVAL;
+  }
+  ByteStream input_params;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&physical_disp_id), sizeof(uint64_t));
+  int error = 0;
+  ByteStream output_params;
+  auto hidl_cb = [&error, &output_params] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+    output_params = params;
+  };
+
+  display_config_->perform(client_handle_, kGetDisplayTileCount, input_params, {}, hidl_cb);
+
+  if (!error) {
+    const uint32_t *data = reinterpret_cast<const uint32_t*>(output_params.data());
+    *num_h_tiles = data ? *data : 0;
+    *num_v_tiles = data ? *(data + 1) : 0;
+  }
+
+  return error;
+}
+
+int ClientImpl::SetPowerModeTiled(uint64_t physical_disp_id, PowerMode power_mode,
+                                  uint32_t tile_h_loc, uint32_t tile_v_loc) {
+  struct PowerModeTiledParams input = {physical_disp_id, power_mode, tile_h_loc, tile_v_loc};
+  ByteStream input_params;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&input),
+                             sizeof(struct PowerModeTiledParams));
+  int error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+
+  display_config_->perform(client_handle_, kSetPowerModeTiled, input_params, {}, hidl_cb);
+
+  return error;
+}
+
+int ClientImpl::SetPanelBrightnessTiled(uint64_t physical_disp_id, uint32_t level,
+                                        uint32_t tile_h_loc, uint32_t tile_v_loc) {
+  struct PanelBrightnessTiledParams input = {physical_disp_id, level, tile_h_loc, tile_v_loc};
+  ByteStream input_params;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&input),
+                             sizeof(struct PanelBrightnessTiledParams));
+  int error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+
+  display_config_->perform(client_handle_, kSetPanelBrightnessTiled, input_params, {}, hidl_cb);
+
+  return error;
+}
+
+int ClientImpl::SetWiderModePreference(uint64_t physical_disp_id, WiderModePref mode_pref) {
+  struct WiderModePrefParams input = {physical_disp_id, mode_pref};
+  ByteStream input_params;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&input),
+                             sizeof(struct WiderModePrefParams));
+  int error = 0;
+  ByteStream output_params;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+
+  display_config_->perform(client_handle_, kSetWiderModePref, input_params, {}, hidl_cb);
+
+  return error;
 }
 
 Return<void> ClientCallback::perform(uint32_t op_code, const ByteStream &input_params,
