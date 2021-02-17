@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2020 The Linux Foundation. All rights reserved.
+* Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -126,6 +126,7 @@ class ClientImpl : public ClientInterface {
   virtual int ControlIdleStatusCallback(bool enable);
   virtual int IsSupportedConfigSwitch(uint32_t disp_id, uint32_t config, bool *supported);
   virtual int GetDisplayType(uint64_t physical_disp_id, DisplayType *disp_type);
+  virtual int DummyDisplayConfigAPI();
 
  private:
   android::sp<IDisplayConfig> display_config_ = nullptr;

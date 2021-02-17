@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2020 The Linux Foundation. All rights reserved.
+* Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -931,6 +931,18 @@ int ClientImpl::IsRCSupported(uint32_t disp_id, bool *supported) {
     *supported = *output;
   }
 
+  return error;
+}
+
+int ClientImpl::DummyDisplayConfigAPI() {
+  int error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+  display_config_->perform(client_handle_, kDummyOpcode, {}, {}, hidl_cb);
+  if (error) {
+    return -EINVAL;
+  }
   return error;
 }
 

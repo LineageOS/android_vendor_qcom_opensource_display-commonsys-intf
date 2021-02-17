@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2020 The Linux Foundation. All rights reserved.
+* Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -1018,6 +1018,9 @@ Return<void> DeviceImpl::perform(uint64_t client_handle, uint32_t op_code,
       break;
     case kGetDisplayType:
       client->ParseGetDisplayType(input_params, _hidl_cb);
+      break;
+    case kDummyOpcode:
+      _hidl_cb(-EINVAL, {}, {});
       break;
     default:
       _hidl_cb(-EINVAL, {}, {});
