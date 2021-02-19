@@ -42,6 +42,8 @@
 #define DISPLAY_CONFIG_API_LEVEL_1
 #define DISPLAY_CONFIG_API_LEVEL_2
 
+#define DISPLAY_CONFIG_TILE_DISPLAY_APIS_1_0
+
 namespace DisplayConfig {
 
 // enum definitions

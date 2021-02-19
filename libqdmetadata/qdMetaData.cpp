@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2020, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2012-2021, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -56,7 +56,11 @@ static int colorMetaDataToColorSpace(ColorMetaData in, ColorSpace_t *out) {
       *out = ITU_R_2020;
     }
   } else if (in.colorPrimaries == ColorPrimaries_BT709_5) {
-    *out = ITU_R_709;
+    if (in.range == Range_Full) {
+      *out = ITU_R_709_FR;
+    } else {
+      *out = ITU_R_709;
+    }
   } else {
     ALOGE(
         "Cannot convert ColorMetaData to ColorSpace_t. "
@@ -82,6 +86,10 @@ static int colorSpaceToColorMetadata(ColorSpace_t in, ColorMetaData *out) {
     case ITU_R_709:
       out->colorPrimaries = ColorPrimaries_BT709_5;
       out->range = Range_Limited;
+      break;
+    case ITU_R_709_FR:
+      out->colorPrimaries = ColorPrimaries_BT709_5;
+      out->range = Range_Full;
       break;
     case ITU_R_2020:
       out->colorPrimaries = ColorPrimaries_BT2020;
