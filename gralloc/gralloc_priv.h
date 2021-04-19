@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011-2020, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2011-2021, The Linux Foundation. All rights reserved.
  * Not a Contribution
  *
  * Copyright (C) 2008 The Android Open Source Project
@@ -80,8 +80,9 @@ inline int roundUpToPageSize(int x) {
 #define HAL_CSC_ITU_R_601 0
 #define HAL_CSC_ITU_R_601_FR 1
 #define HAL_CSC_ITU_R_709 2
-#define HAL_CSC_ITU_R_2020 3
-#define HAL_CSC_ITU_R_2020_FR 4
+#define HAL_CSC_ITU_R_709_FR 3
+#define HAL_CSC_ITU_R_2020 4
+#define HAL_CSC_ITU_R_2020_FR 5
 
 /* possible formats for 3D content*/
 enum {

@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2020 The Linux Foundation. All rights reserved.
+* Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -126,6 +126,14 @@ class ClientImpl : public ClientInterface {
   virtual int ControlIdleStatusCallback(bool enable);
   virtual int IsSupportedConfigSwitch(uint32_t disp_id, uint32_t config, bool *supported);
   virtual int GetDisplayType(uint64_t physical_disp_id, DisplayType *disp_type);
+  virtual int AllowIdleFallback();
+  virtual int GetDisplayTileCount(uint64_t physical_disp_id, uint32_t *num_h_tiles,
+                                  uint32_t *num_v_tiles);
+  virtual int SetPowerModeTiled(uint64_t physical_disp_id, PowerMode power_mode,
+                                uint32_t tile_h_loc, uint32_t tile_v_loc);
+  virtual int SetPanelBrightnessTiled(uint64_t physical_disp_id, uint32_t level,
+                                      uint32_t tile_h_loc, uint32_t tile_v_loc);
+  virtual int SetWiderModePreference(uint64_t physical_disp_id, WiderModePref mode_pref);
 
  private:
   android::sp<IDisplayConfig> display_config_ = nullptr;
