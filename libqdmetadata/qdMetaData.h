@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2020, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2012-2021, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -55,6 +55,7 @@ enum ColorSpace_t {
   ITU_R_601,
   ITU_R_601_FR,
   ITU_R_709,
+  ITU_R_709_FR,
   ITU_R_2020,
   ITU_R_2020_FR,
 };

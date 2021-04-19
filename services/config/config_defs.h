@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2020 The Linux Foundation. All rights reserved.
+* Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions are
@@ -40,6 +40,9 @@
 // client code will automatically get compiled.
 #define DISPLAY_CONFIG_API_LEVEL_0
 #define DISPLAY_CONFIG_API_LEVEL_1
+#define DISPLAY_CONFIG_API_LEVEL_2
+
+#define DISPLAY_CONFIG_TILE_DISPLAY_APIS_1_0
 
 namespace DisplayConfig {
 
@@ -238,6 +241,31 @@ struct SupportedModesParams {
   uint32_t mode = 0;
 };
 
+struct PowerModeTiledParams {
+  uint64_t physical_disp_id = 0;
+  PowerMode power_mode = PowerMode::kOn;
+  uint32_t tile_h_loc = 0;
+  uint32_t tile_v_loc = 0;
+};
+
+struct PanelBrightnessTiledParams {
+  uint64_t physical_disp_id = 0;
+  uint32_t level = 255;
+  uint32_t tile_h_loc = 0;
+  uint32_t tile_v_loc = 0;
+};
+
+enum class WiderModePref : int {
+  kNoPreference,
+  kWiderAsyncMode,
+  kWiderSyncMode
+};
+
+struct WiderModePrefParams {
+  uint64_t physical_disp_id = 0;
+  WiderModePref mode_pref = WiderModePref::kNoPreference;
+};
+
 /* Callback Interface */
 class ConfigCallback {
  public:
@@ -322,6 +350,18 @@ class ConfigInterface {
                                       bool* /* supported */) DEFAULT_RET
   virtual int GetDisplayType(uint64_t /* physical_disp_id */,
                              DisplayType* /* disp_type */) DEFAULT_RET
+  virtual int AllowIdleFallback() DEFAULT_RET
+  virtual int GetDisplayTileCount(uint64_t /* physical_disp_id */,
+                                  uint32_t* /* Display h tiles count (Min. 1 tile) */,
+                                  uint32_t* /* Display v tiles count (Min. 1 tile) */) DEFAULT_RET
+  virtual int SetPowerModeTiled(uint64_t /* physical_disp_id */, PowerMode /* power_mode */,
+                                uint32_t /* Display tile h location */,
+                                uint32_t /* Display tile v location */) DEFAULT_RET
+  virtual int SetPanelBrightnessTiled(uint64_t /* physical_disp_id */, uint32_t /* level */,
+                                      uint32_t /* Display tile h location */,
+                                      uint32_t /* Display tile v location */) DEFAULT_RET
+  virtual int SetWiderModePreference(uint64_t /* physical_disp_id */,
+                                     WiderModePref /* mode_pref */) DEFAULT_RET
 
   // deprecated APIs
   virtual int GetDebugProperty(const std::string /* prop_name */,

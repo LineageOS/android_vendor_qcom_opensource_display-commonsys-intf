@@ -181,6 +181,24 @@ Error encodeVideoTimestampInfo(VideoTimestampInfo &in, hidl_vec<uint8_t> *out) {
   return Error::NONE;
 }
 
+Error decodeYUVPlaneInfoMetadata(hidl_vec<uint8_t> &in, qti_ycbcr *out) {
+  if (!in.size() || !out) {
+    return Error::BAD_VALUE;
+  }
+  qti_ycbcr *p = reinterpret_cast<qti_ycbcr *>(in.data());
+  memcpy(out, in.data(), (YCBCR_LAYOUT_ARRAY_SIZE * sizeof(qti_ycbcr)));
+  return Error::NONE;
+}
+
+Error encodeYUVPlaneInfoMetadata(qti_ycbcr *in, hidl_vec<uint8_t> *out) {
+  if (!out) {
+    return Error::BAD_VALUE;
+  }
+  out->resize(YCBCR_LAYOUT_ARRAY_SIZE * sizeof(qti_ycbcr));
+  memcpy(out->data(), in, YCBCR_LAYOUT_ARRAY_SIZE * sizeof(qti_ycbcr));
+  return Error::NONE;
+}
+
 MetadataType getMetadataType(uint32_t in) {
   switch (in) {
     case QTI_VT_TIMESTAMP:
@@ -223,6 +241,16 @@ MetadataType getMetadataType(uint32_t in) {
       return MetadataType_VendorMetadataStatus;
     case QTI_BUFFER_TYPE:
       return MetadataType_BufferType;
+    case QTI_CUSTOM_DIMENSIONS_STRIDE:
+      return MetadataType_CustomDimensionsStride;
+    case QTI_CUSTOM_DIMENSIONS_HEIGHT:
+      return MetadataType_CustomDimensionsHeight;
+    case QTI_RGB_DATA_ADDRESS:
+      return MetadataType_RgbDataAddress;
+    case QTI_COLORSPACE:
+      return MetadataType_ColorSpace;
+    case QTI_YUV_PLANE_INFO:
+      return MetadataType_YuvPlaneInfo;
     default:
       return MetadataType_Invalid;
   }
@@ -318,6 +346,25 @@ Error get(void *buffer, uint32_t type, void *param) {
     case QTI_BUFFER_TYPE:
       err = static_cast<Error>(android::gralloc4::decodeUint32(
           qtigralloc::MetadataType_BufferType, bytestream, (uint32_t *)param));
+      break;
+    case QTI_CUSTOM_DIMENSIONS_STRIDE:
+      err = static_cast<Error>(android::gralloc4::decodeUint32(
+          qtigralloc::MetadataType_CustomDimensionsStride, bytestream, (uint32_t *)param));
+      break;
+    case QTI_CUSTOM_DIMENSIONS_HEIGHT:
+      err = static_cast<Error>(android::gralloc4::decodeUint32(
+          qtigralloc::MetadataType_CustomDimensionsHeight, bytestream, (uint32_t *)param));
+      break;
+    case QTI_RGB_DATA_ADDRESS:
+      err = static_cast<Error>(android::gralloc4::decodeUint64(
+          qtigralloc::MetadataType_RgbDataAddress, bytestream, (uint64_t *)param));
+      break;
+    case QTI_COLORSPACE:
+      err = static_cast<Error>(android::gralloc4::decodeUint32(qtigralloc::MetadataType_ColorSpace,
+                                                               bytestream, (uint32_t *)param));
+      break;
+    case QTI_YUV_PLANE_INFO:
+      err = decodeYUVPlaneInfoMetadata(bytestream, (qti_ycbcr *)param);
       break;
     default:
       param = nullptr;
