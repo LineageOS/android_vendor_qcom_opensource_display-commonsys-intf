@@ -72,6 +72,7 @@ class DeviceImpl : public IDisplayConfig, public android::hardware::hidl_death_r
     virtual void NotifyQsyncChange(bool qsync_enabled, int32_t refresh_rate,
                                    int32_t qsync_refresh_rate);
     virtual void NotifyIdleStatus(bool is_idle);
+    virtual void NotifyCameraSmoothInfo(CameraSmoothOp op, uint32_t fps);
 
     void ParseIsDisplayConnected(const ByteStream &input_params, perform_cb _hidl_cb);
     void ParseSetDisplayStatus(const ByteStream &input_params, perform_cb _hidl_cb);
@@ -89,6 +90,8 @@ class DeviceImpl : public IDisplayConfig, public android::hardware::hidl_death_r
     void ParseSetIdleTimeout(const ByteStream &input_params, perform_cb _hidl_cb);
     void ParseGetHdrCapabilities(const ByteStream &input_params, perform_cb _hidl_cb);
     void ParseSetCameraLaunchStatus(const ByteStream &input_params, perform_cb _hidl_cb);
+    void ParseSetCameraSmoothInfo(const ByteStream &input_params, perform_cb _hidl_cb);
+    void ParseControlCameraSmoothCallback(const ByteStream &input_params, perform_cb _hidl_cb);
     void ParseDisplayBwTransactionPending(perform_cb _hidl_cb);
     void ParseSetDisplayAnimating(const ByteStream &input_params, perform_cb _hidl_cb);
     void ParseControlIdlePowerCollapse(const ByteStream &input_params, perform_cb _hidl_cb);

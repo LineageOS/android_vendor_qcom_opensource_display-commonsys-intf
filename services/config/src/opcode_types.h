@@ -87,6 +87,8 @@ enum OpCode {
   kSetPowerModeTiled = 51,
   kSetPanelBrightnessTiled = 52,
   kSetWiderModePref = 53,
+  kSetCameraSmoothInfo = 54,
+  kControlCameraSmoothCallback = 55,
 
   kDestroy = 0xFFFF, // Destroy sequence execution
 };

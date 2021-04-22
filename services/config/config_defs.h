@@ -42,6 +42,7 @@
 #define DISPLAY_CONFIG_API_LEVEL_1
 #define DISPLAY_CONFIG_API_LEVEL_2
 
+#define DISPLAY_CONFIG_CAMERA_SMOOTH_APIs_1_0
 #define DISPLAY_CONFIG_TILE_DISPLAY_APIS_1_0
 
 namespace DisplayConfig {
@@ -100,6 +101,11 @@ enum class TUIEventType : int {
   kPrepareTUITransition,
   kStartTUITransition,
   kEndTUITransition,
+};
+
+enum class CameraSmoothOp : int {
+  kOff,
+  kOn,
 };
 
 // Input and Output Params structures
@@ -266,6 +272,11 @@ struct WiderModePrefParams {
   WiderModePref mode_pref = WiderModePref::kNoPreference;
 };
 
+struct CameraSmoothInfo {
+  CameraSmoothOp op = CameraSmoothOp::kOff;
+  uint32_t fps = 0;
+};
+
 /* Callback Interface */
 class ConfigCallback {
  public:
@@ -273,6 +284,7 @@ class ConfigCallback {
   virtual void NotifyQsyncChange(bool /* qsync_enabled */ , int /* refresh_rate */,
                                  int /* qsync_refresh_rate */) { }
   virtual void NotifyIdleStatus(bool /* is_idle */) { }
+  virtual void NotifyCameraSmoothInfo(CameraSmoothOp /* op */, uint32_t /* fps */) { }
 
  protected:
   virtual ~ConfigCallback() { }
@@ -302,6 +314,7 @@ class ConfigInterface {
   virtual int SetIdleTimeout(uint32_t /* value */) DEFAULT_RET
   virtual int GetHDRCapabilities(DisplayType /* dpy */, HDRCapsParams* /* caps */) DEFAULT_RET
   virtual int SetCameraLaunchStatus(uint32_t /* on */) DEFAULT_RET
+  virtual int SetCameraSmoothInfo(CameraSmoothOp /* op */, uint32_t /* fps */) DEFAULT_RET
   virtual int DisplayBWTransactionPending(bool* /* status */) DEFAULT_RET
   virtual int SetDisplayAnimating(uint64_t /* display_id */, bool /* animating */) DEFAULT_RET
   virtual int ControlIdlePowerCollapse(bool /* enable */, bool /* synchronous */) DEFAULT_RET
@@ -362,6 +375,7 @@ class ConfigInterface {
                                       uint32_t /* Display tile v location */) DEFAULT_RET
   virtual int SetWiderModePreference(uint64_t /* physical_disp_id */,
                                      WiderModePref /* mode_pref */) DEFAULT_RET
+  virtual int ControlCameraSmoothCallback(bool /* enable */) DEFAULT_RET
 
   // deprecated APIs
   virtual int GetDebugProperty(const std::string /* prop_name */,
