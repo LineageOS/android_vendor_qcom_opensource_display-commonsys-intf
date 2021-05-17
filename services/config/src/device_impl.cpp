@@ -851,6 +851,11 @@ void DeviceImpl::DeviceClientContext::ParseGetDisplayType(const ByteStream &inpu
   _hidl_cb(error, output_params, {});
 }
 
+void DeviceImpl::DeviceClientContext::ParseAllowIdleFallback(perform_cb _hidl_cb) {
+  int32_t error = intf_->AllowIdleFallback();
+  _hidl_cb(error, {}, {});
+}
+
 Return<void> DeviceImpl::perform(uint64_t client_handle, uint32_t op_code,
                                  const ByteStream &input_params, const HandleStream &input_handles,
                                  perform_cb _hidl_cb) {
@@ -1018,6 +1023,9 @@ Return<void> DeviceImpl::perform(uint64_t client_handle, uint32_t op_code,
       break;
     case kGetDisplayType:
       client->ParseGetDisplayType(input_params, _hidl_cb);
+      break;
+    case kAllowIdleFallback:
+      client->ParseAllowIdleFallback(_hidl_cb);
       break;
     case kDummyOpcode:
       _hidl_cb(-EINVAL, {}, {});

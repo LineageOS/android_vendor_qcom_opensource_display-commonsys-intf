@@ -172,8 +172,9 @@
 #define HAL_CSC_ITU_R_601 0
 #define HAL_CSC_ITU_R_601_FR 1
 #define HAL_CSC_ITU_R_709 2
-#define HAL_CSC_ITU_R_2020 3
-#define HAL_CSC_ITU_R_2020_FR 4
+#define HAL_CSC_ITU_R_709_FR 3
+#define HAL_CSC_ITU_R_2020 4
+#define HAL_CSC_ITU_R_2020_FR 5
 enum { BUFFER_TYPE_UI = 0, BUFFER_TYPE_VIDEO };
 
 #endif  //__QTIGRALLOCDEFS_H__

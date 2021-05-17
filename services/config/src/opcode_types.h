@@ -82,7 +82,8 @@ enum OpCode {
   kControlIdleStatusCallback = 46,
   kIsSupportedConfigSwitch = 47,
   kGetDisplayType = 48,
-  kDummyOpcode = 49,
+  kAllowIdleFallback = 49,
+  kDummyOpcode = 50,
 
   kDestroy = 0xFFFF, // Destroy sequence execution
 };

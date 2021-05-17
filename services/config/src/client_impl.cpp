@@ -995,6 +995,17 @@ int ClientImpl::GetDisplayType(uint64_t physical_disp_id, DisplayType *disp_type
   return error;
 }
 
+int ClientImpl::AllowIdleFallback() {
+  int error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+  if (display_config_) {
+    display_config_->perform(client_handle_, kAllowIdleFallback, {}, {}, hidl_cb);
+  }
+  return error;
+}
+
 void ClientCallback::ParseNotifyCWBBufferDone(const ByteStream &input_params,
                                               const HandleStream &input_handles) {
   const int *error;

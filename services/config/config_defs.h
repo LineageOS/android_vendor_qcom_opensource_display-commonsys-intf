@@ -42,6 +42,7 @@
 // client code will automatically get compiled.
 #define DISPLAY_CONFIG_API_LEVEL_0
 #define DISPLAY_CONFIG_API_LEVEL_1
+#define DISPLAY_CONFIG_API_LEVEL_2
 
 namespace DisplayConfig {
 
@@ -324,6 +325,7 @@ class ConfigInterface {
                                       bool* /* supported */) DEFAULT_RET
   virtual int GetDisplayType(uint64_t /* physical_disp_id */,
                              DisplayType* /* disp_type */) DEFAULT_RET
+  virtual int AllowIdleFallback() DEFAULT_RET
   virtual int DummyDisplayConfigAPI() DEFAULT_RET
 
   // deprecated APIs
