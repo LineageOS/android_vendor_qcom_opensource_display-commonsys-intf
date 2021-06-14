@@ -353,6 +353,21 @@ int ClientImpl::SetCameraLaunchStatus(uint32_t on) {
   return error;
 }
 
+int ClientImpl::SetCameraSmoothInfo(CameraSmoothOp op, uint32_t fps) {
+  CameraSmoothInfo input = {op, fps};
+  ByteStream input_params;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&input),
+                             sizeof(CameraSmoothInfo));
+  int error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+
+  display_config_->perform(client_handle_, kSetCameraSmoothInfo, input_params, {}, hidl_cb);
+
+  return error;
+}
+
 int ClientImpl::DisplayBWTransactionPending(bool *status) {
   const bool *output;
   ByteStream output_params;
@@ -849,6 +864,19 @@ int ClientImpl::ControlIdleStatusCallback(bool enable) {
   return error;
 }
 
+int ClientImpl::ControlCameraSmoothCallback(bool enable) {
+  ByteStream input_params;
+  input_params.setToExternal(reinterpret_cast<uint8_t*>(&enable), sizeof(bool));
+  int32_t error = 0;
+  auto hidl_cb = [&error] (int32_t err, ByteStream params, HandleStream handles) {
+    error = err;
+  };
+
+  display_config_->perform(client_handle_, kControlCameraSmoothCallback, input_params, {}, hidl_cb);
+
+  return error;
+}
+
 int ClientImpl::SendTUIEvent(DisplayType dpy, TUIEventType event_type) {
   struct TUIEventParams input = {dpy, event_type};
   ByteStream input_params;
@@ -1021,6 +1049,16 @@ void ClientCallback::ParseNotifyQsyncChange(const ByteStream &input_params) {
                                qsync_data->qsync_refresh_rate);
 }
 
+void ClientCallback::ParseNotifyCameraSmooth(const ByteStream &input_params) {
+  if (callback_ == nullptr || input_params.size() == 0) {
+    return;
+  }
+
+  const uint8_t *data = input_params.data();
+  const CameraSmoothInfo *camera_info = reinterpret_cast<const CameraSmoothInfo*>(data);
+  callback_->NotifyCameraSmoothInfo(camera_info->op, camera_info->fps);
+}
+
 void ClientCallback::ParseNotifyIdleStatus(const ByteStream &input_params) {
   const bool *is_idle;
   if (callback_ == nullptr || input_params.size() == 0) {
@@ -1116,6 +1154,9 @@ Return<void> ClientCallback::perform(uint32_t op_code, const ByteStream &input_p
       break;
     case kControlIdleStatusCallback:
       ParseNotifyIdleStatus(input_params);
+      break;
+    case kSetCameraSmoothInfo:
+      ParseNotifyCameraSmooth(input_params);
       break;
     default:
       break;

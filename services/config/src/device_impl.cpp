@@ -178,6 +178,18 @@ void DeviceImpl::DeviceClientContext::NotifyIdleStatus(bool is_idle) {
   }
 }
 
+void DeviceImpl::DeviceClientContext::NotifyCameraSmoothInfo(CameraSmoothOp op, uint32_t fps) {
+  struct CameraSmoothInfo data = {op, fps};
+  ByteStream output_params;
+
+  output_params.setToExternal(reinterpret_cast<uint8_t*>(&data), sizeof(data));
+
+  auto status = callback_->perform(kSetCameraSmoothInfo, output_params, {});
+  if (status.isDeadObject()) {
+    return;
+  }
+}
+
 void DeviceImpl::DeviceClientContext::ParseIsDisplayConnected(const ByteStream &input_params,
                                                               perform_cb _hidl_cb) {
   const DisplayType *dpy;
@@ -392,6 +404,28 @@ void DeviceImpl::DeviceClientContext::ParseSetCameraLaunchStatus(const ByteStrea
   launch_status_data = reinterpret_cast<const uint32_t*>(data);
 
   int32_t error = intf_->SetCameraLaunchStatus(*launch_status_data);
+
+  _hidl_cb(error, {}, {});
+}
+
+void DeviceImpl::DeviceClientContext::ParseSetCameraSmoothInfo(const ByteStream &input_params,
+                                                           perform_cb _hidl_cb) {
+  const CameraSmoothInfo *camera_info;
+
+  const uint8_t *data = input_params.data();
+  camera_info = reinterpret_cast<const CameraSmoothInfo*>(data);
+  int32_t error = intf_->SetCameraSmoothInfo(camera_info->op, camera_info->fps);
+  _hidl_cb(error, {}, {});
+}
+
+void DeviceImpl::DeviceClientContext::ParseControlCameraSmoothCallback(const ByteStream &input_params,
+                                                                perform_cb _hidl_cb) {
+  const bool *enable;
+
+  const uint8_t *data = input_params.data();
+  enable = reinterpret_cast<const bool*>(data);
+
+  int32_t error = intf_->ControlCameraSmoothCallback(*enable);
 
   _hidl_cb(error, {}, {});
 }
@@ -982,6 +1016,12 @@ Return<void> DeviceImpl::perform(uint64_t client_handle, uint32_t op_code,
       break;
     case kSetCameraLaunchStatus:
       client->ParseSetCameraLaunchStatus(input_params, _hidl_cb);
+      break;
+    case kSetCameraSmoothInfo:
+      client->ParseSetCameraSmoothInfo(input_params, _hidl_cb);
+      break;
+    case kControlCameraSmoothCallback:
+      client->ParseControlCameraSmoothCallback(input_params, _hidl_cb);
       break;
     case kDisplayBwTransactionPending:
       client->ParseDisplayBwTransactionPending(_hidl_cb);
