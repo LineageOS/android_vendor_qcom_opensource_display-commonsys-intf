@@ -6,6 +6,10 @@ cc_library_shared {
         "-Wno-sign-conversion",
         "-DLOG_TAG=\"qtigralloc\"",
     ],
+    export_include_dirs: ["."],
+    header_abi_checker: {
+        enabled: true,
+    },
     shared_libs: [
          "liblog",
          "libcutils",

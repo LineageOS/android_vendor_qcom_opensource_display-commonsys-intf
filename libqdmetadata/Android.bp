@@ -18,5 +18,9 @@ cc_library_shared {
     header_libs: ["libhardware_headers", "display_intf_headers"],
     srcs: ["qdMetaData.cpp", "qd_utils.cpp"],
     export_header_lib_headers: ["display_intf_headers"],
+    export_include_dirs: ["."],
+    header_abi_checker: {
+        enabled: true,
+    },
 }
 
