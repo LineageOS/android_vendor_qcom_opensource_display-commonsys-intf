@@ -39,6 +39,7 @@
 #define PASS_COMPOSITOR_TID 1
 #define SMART_DISPLAY_CONFIG 1
 #define FPS_MITIGATION_ENABLED 1
+#define UNIFIED_DRAW_EXT 1
 
 namespace composer {
 
@@ -96,6 +97,7 @@ class DisplayExtnIntf {
   virtual bool IsSmartDisplayConfig(uint32_t display_id) = 0;
   virtual void SetFpsMitigationCallback(const FpsMitigationCallback callback,
                                         std::vector<float> fps_list) = 0;
+  virtual void EndUnifiedDraw(uint32_t display_id) = 0;
 
  protected:
   virtual ~DisplayExtnIntf() { }
