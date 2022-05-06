@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2020 The Linux Foundation. All rights reserved.
  *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
@@ -125,6 +127,9 @@ static const MetadataType MetadataType_RgbDataAddress = {VENDOR_QTI, QTI_RGB_DAT
 
 static const MetadataType MetadataType_ColorSpace = {VENDOR_QTI, QTI_COLORSPACE};
 static const MetadataType MetadataType_YuvPlaneInfo = {VENDOR_QTI, QTI_YUV_PLANE_INFO};
+static const MetadataType MetadataType_BufferPermission = {VENDOR_QTI, QTI_BUFFER_PERMISSION};
+static const MetadataType MetadataType_MemHandle = {VENDOR_QTI, QTI_MEM_HANDLE};
+
 // 0 is also used as invalid value in standard metadata
 static const MetadataType MetadataType_Invalid = {VENDOR_QTI, 0};
 
@@ -156,6 +161,8 @@ Error decodeVideoTimestampInfo(hidl_vec<uint8_t> &in, VideoTimestampInfo *out);
 Error encodeVideoTimestampInfo(VideoTimestampInfo &in, hidl_vec<uint8_t> *out);
 Error decodeYUVPlaneInfoMetadata(hidl_vec<uint8_t> &in, qti_ycbcr *out);
 Error encodeYUVPlaneInfoMetadata(qti_ycbcr *in, hidl_vec<uint8_t> *out);
+Error decodeBufferPermission(hidl_vec<uint8_t> &in, BufferPermission *out);
+Error encodeBufferPermission(BufferPermission *in, hidl_vec<uint8_t> *out);
 }  // namespace qtigralloc
 
 #endif  //__QTIGRALLOC_H__

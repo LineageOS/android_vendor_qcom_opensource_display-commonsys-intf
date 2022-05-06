@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
  *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
@@ -77,6 +79,8 @@
 /* This flag indicates video HW usage */
 #define GRALLOC_USAGE_PRIVATE_VIDEO_HW           1ULL << 52
 
+/* This flag indicates trusted VM use case */
+#define GRALLOC_USAGE_PRIVATE_TRUSTED_VM         1ULL << 53
 
 // OEM specific HAL formats
 #define HAL_PIXEL_FORMAT_RGBA_5551 6
@@ -138,6 +142,7 @@
 
 // UBWC aligned Venus format
 #define HAL_PIXEL_FORMAT_YCbCr_420_SP_VENUS_UBWC 0x7FA30C06
+#define HAL_PIXEL_FORMAT_YCbCr_420_SP_4R_UBWC 0x7FA30C07
 #define HAL_PIXEL_FORMAT_YCbCr_420_TP10_UBWC 0x7FA30C09
 
 // Khronos ASTC formats

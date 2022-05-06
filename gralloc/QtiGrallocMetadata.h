@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2020-2021 The Linux Foundation. All rights reserved.
  *
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
  * met:
@@ -64,6 +66,10 @@
 #define QTI_RGB_DATA_ADDRESS 10023
 #define QTI_COLORSPACE 10024
 #define QTI_YUV_PLANE_INFO 10025
+// Indicates buffer access permission of its client
+#define QTI_BUFFER_PERMISSION 10026
+#define QTI_MEM_HANDLE 10027
+
 
 // Used to indicate to framework that internal definitions are used instead
 #define COMPRESSION_QTI_UBWC 20001
@@ -182,6 +188,23 @@ struct qti_ycbcr {
   uint32_t yStride;
   uint32_t cStride;
   uint32_t chromaStep;
+};
+
+enum BufferClient {
+  BUFFER_CLIENT_INVALID = -1,
+  BUFFER_CLIENT_DPU = 0,
+  BUFFER_CLIENT_UNTRUSTED_VM = 1,
+  BUFFER_CLIENT_TRUSTED_VM = 2,
+  BUFFER_CLIENT_MAX,
+};
+
+union BufferPermission {
+  struct {
+    uint8_t read : 1;
+    uint8_t write : 1;
+    uint8_t execute : 1;
+  };
+  uint8_t permission;
 };
 
 #define METADATA_SET_SIZE 512
