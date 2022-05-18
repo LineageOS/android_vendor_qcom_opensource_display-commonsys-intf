@@ -69,7 +69,7 @@
 // Indicates buffer access permission of its client
 #define QTI_BUFFER_PERMISSION 10026
 #define QTI_MEM_HANDLE 10027
-
+#define QTI_TIMED_RENDERING 10028
 
 // Used to indicate to framework that internal definitions are used instead
 #define COMPRESSION_QTI_UBWC 20001

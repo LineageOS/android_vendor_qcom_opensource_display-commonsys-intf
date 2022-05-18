@@ -70,9 +70,12 @@
 
 #include <sys/types.h>
 #include <ui/Fence.h>
+#include <cutils/native_handle.h>
 
 #include <vector>
 #include <string>
+
+#define TIMED_RENDERING_METADATA_FEATURE 1
 
 namespace smomo {
 
@@ -108,6 +111,7 @@ struct SmomoBufferStats {
   nsecs_t timestamp;  // layer buffer's desired present timestamp
   nsecs_t dequeue_latency;  // last dequeue duration
   int64_t key;  // buffer identity
+  buffer_handle_t buffer_hnd;  // layer buffer handle
 };
 
 enum DisplayType {

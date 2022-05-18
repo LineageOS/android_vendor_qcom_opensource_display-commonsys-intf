@@ -78,9 +78,6 @@
 
 #include "QtiGrallocMetadata.h"
 
-#ifndef __QTI_DISPLAY_GRALLOC__
-#pragma message "QtiGrallocPriv.h should not be included"
-#endif
 
 /*
  *
@@ -142,6 +139,10 @@ struct MetaData_t {
   VideoTimestampInfo videoTsInfo;
   BufferPermission bufferPerm[BUFFER_CLIENT_MAX];
   int64_t memHandle;
+
+  /* Set by clients to indicate that timed rendering will be enabled
+   * or disabled for this buffer. */
+  uint32_t timedRendering;
 };
 
 namespace qtigralloc {

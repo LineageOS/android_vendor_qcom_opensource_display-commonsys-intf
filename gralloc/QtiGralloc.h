@@ -130,6 +130,8 @@ static const MetadataType MetadataType_YuvPlaneInfo = {VENDOR_QTI, QTI_YUV_PLANE
 static const MetadataType MetadataType_BufferPermission = {VENDOR_QTI, QTI_BUFFER_PERMISSION};
 static const MetadataType MetadataType_MemHandle = {VENDOR_QTI, QTI_MEM_HANDLE};
 
+static const MetadataType MetadataType_TimedRendering = {VENDOR_QTI, QTI_TIMED_RENDERING};
+
 // 0 is also used as invalid value in standard metadata
 static const MetadataType MetadataType_Invalid = {VENDOR_QTI, 0};
 
