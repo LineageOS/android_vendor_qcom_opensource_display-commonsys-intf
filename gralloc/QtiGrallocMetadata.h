@@ -70,7 +70,9 @@
 #define QTI_BUFFER_PERMISSION 10026
 #define QTI_MEM_HANDLE 10027
 #define QTI_TIMED_RENDERING 10028
-
+#define QTI_CUSTOM_CONTENT_METADATA 10029
+// Video transcode metadata stat
+#define QTI_VIDEO_TRANSCODE_STATS 10030
 // Used to indicate to framework that internal definitions are used instead
 #define COMPRESSION_QTI_UBWC 20001
 #define INTERLACED_QTI 20002
@@ -165,6 +167,13 @@ struct VideoHistogramMetadata {
   uint32_t decode_width;
   uint32_t decode_height;
   uint32_t reserved[12];
+};
+
+#define VIDEO_TRANSCODE_STATS_SIZE 128 //32 payloads with 4 bytes each: 4x32 = 128
+#define VIDEO_TRANSCODE_PAYLOAD_NUM 32
+struct VideoTranscodeStatsMetadata {
+  uint32_t stats_info[VIDEO_TRANSCODE_PAYLOAD_NUM];   /* Transcode stats payload */
+  uint32_t stat_len;                                  /* Full payload size in bytes */
 };
 
 #define VIDEO_TIMESTAMP_INFO_SIZE 16
