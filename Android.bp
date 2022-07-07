@@ -4,6 +4,11 @@ soong_namespace {
 cc_library_headers {
     name: "display_intf_headers",
     vendor_available: true,
+    defaults: [
+        "gralloc_handle_has_custom_content_md_reserved_size_defaults",
+        "gralloc_handle_has_reserved_size_defaults",
+        "gralloc_handle_has_ubwcp_format_defaults",
+    ],
     export_include_dirs: [
         "gralloc",
         "include",
