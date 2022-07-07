@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f49ac77_01507a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 18205
+      },
+      "writtenOn": "2022-07-07T21:26:54Z",
+      "side": 1,
+      "message": "Unbreaks pixel.\nVerified that build succeeds both with GRALLOC_HANDLE_HAS_RESERVED_SIZE set and unset.",
+      "revId": "1b983da4adfc9318dae482ac1b93387852399e88",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
