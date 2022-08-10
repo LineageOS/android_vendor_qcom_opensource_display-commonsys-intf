@@ -82,6 +82,9 @@
 /* This flag indicates trusted VM use case */
 #define GRALLOC_USAGE_PRIVATE_TRUSTED_VM         1ULL << 53
 
+/* This flag is used to indicate No UBWC-P support */
+#define GRALLOC_USAGE_PRIVATE_NO_UBWC_P          1ULL << 54
+
 // OEM specific HAL formats
 #define HAL_PIXEL_FORMAT_RGBA_5551 6
 #define HAL_PIXEL_FORMAT_RGBA_4444 7
