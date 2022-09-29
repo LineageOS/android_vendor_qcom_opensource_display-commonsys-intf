@@ -86,6 +86,7 @@ struct LayerFlags {
   bool secure_video = false;
   bool secure_ui = false;
   bool compatible = false;
+  bool blur = false;
 };
 
 struct FBTLayerInfo {
