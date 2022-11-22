@@ -73,7 +73,7 @@
 #define USE_SYSTEM_HEAP_FOR_SENSORS          GRALLOC_PROP("use_system_heap_for_sensors")
 
 #define ROUND_UP_PAGESIZE(x) roundUpToPageSize(x)
-inline int roundUpToPageSize(int x) {
+inline size_t roundUpToPageSize(size_t x) {
   return (x + (getpagesize() - 1)) & ~(getpagesize() - 1);
 }
 
