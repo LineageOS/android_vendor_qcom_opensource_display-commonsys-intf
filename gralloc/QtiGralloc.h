@@ -27,6 +27,10 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
 #ifndef __QTIGRALLOC_H__
@@ -100,6 +104,9 @@ static const MetadataType MetadataType_VideoTranscodeStats = {VENDOR_QTI,
                                                               QTI_VIDEO_TRANSCODE_STATS};
 
 static const MetadataType MetadataType_VideoTimestampInfo = {VENDOR_QTI, QTI_VIDEO_TS_INFO};
+
+static const MetadataType MetadataType_VideoEarlyNotifyLineCount = {VENDOR_QTI,
+                                                                    QTI_EARLYNOTIFY_LINECOUNT};
 
 static const MetadataType MetadataType_FD = {VENDOR_QTI, QTI_FD};
 
