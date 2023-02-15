@@ -16,12 +16,35 @@ aidl_interface {
             enabled: false,
         },
     },
-    versions: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-    ],
+
     owner: "qti",
+    versions_with_info: [
+        {
+            version: "1",
+            imports: ["android.hardware.common-V2"],
+        },
+        {
+            version: "2",
+            imports: ["android.hardware.common-V2"],
+        },
+        {
+            version: "3",
+            imports: ["android.hardware.common-V2"],
+        },
+        {
+            version: "4",
+            imports: ["android.hardware.common-V2"],
+        },
+        {
+            version: "5",
+            imports: ["android.hardware.common-V2"],
+        },
+        {
+            version: "6",
+            imports: ["android.hardware.common-V2"],
+        },
+
+    ],
+    frozen: true,
+
 }
