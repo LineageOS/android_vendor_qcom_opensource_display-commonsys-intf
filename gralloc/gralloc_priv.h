@@ -53,6 +53,13 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 #ifndef __GRALLOC_PRIV_H__
 #define __GRALLOC_PRIV_H__
 
@@ -74,7 +81,7 @@
 
 #define ROUND_UP_PAGESIZE(x) roundUpToPageSize(x)
 inline size_t roundUpToPageSize(size_t x) {
-  return (x + (getpagesize() - 1)) & ~(getpagesize() - 1);
+  return (x + (size_t(getpagesize()) - 1)) & ~(size_t(getpagesize()) - 1);
 }
 
 /* Legacy gralloc1 definitions */
