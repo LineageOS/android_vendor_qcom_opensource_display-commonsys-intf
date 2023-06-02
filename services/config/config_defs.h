@@ -30,7 +30,7 @@
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
- * Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted (subject to the limitations in the
@@ -422,6 +422,12 @@ class ConfigInterface {
                                std::string /* value */) DEFAULT_RET
   virtual int GetSupportedDSIBitClks(uint32_t /* disp_id */,
                                      std::vector<uint64_t> /* bit_clks */) DEFAULT_RET
+  virtual int tunnellingInit() DEFAULT_RET
+  virtual int dequeueTunnelledBuffer(const native_handle_t* /*buffer */,
+                                     const native_handle_t* /*fence handle*/) DEFAULT_RET
+  virtual int queueTunnelledBuffer(const native_handle_t* /*buffer */,
+                                   const native_handle_t* /* fence handle*/) DEFAULT_RET
+  virtual int tunnellingDeinit() DEFAULT_RET
 
  protected:
   virtual ~ConfigInterface() { }
