@@ -26,7 +26,7 @@
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *//*
-*  Changes from Qualcomm Innovation Center are provided under the following license:
+ *  Changes from Qualcomm Innovation Center are provided under the following license:
  *
  *  Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
  *
@@ -80,60 +80,12 @@
 
 package vendor.qti.hardware.display.config;
 @VintfStability
-interface IDisplayConfig {
-  boolean isDisplayConnected(in vendor.qti.hardware.display.config.DisplayType dpy);
-  void setDisplayStatus(in vendor.qti.hardware.display.config.DisplayType dpy, in vendor.qti.hardware.display.config.ExternalStatus status);
-  void configureDynRefreshRate(in vendor.qti.hardware.display.config.DynRefreshRateOp op, in int refrestRate);
-  int getConfigCount(in vendor.qti.hardware.display.config.DisplayType dpy);
-  int getActiveConfig(in vendor.qti.hardware.display.config.DisplayType dpy);
-  void setActiveConfig(in vendor.qti.hardware.display.config.DisplayType dpy, in int config);
-  vendor.qti.hardware.display.config.Attributes getDisplayAttributes(in int configIndex, in vendor.qti.hardware.display.config.DisplayType dpy);
-  void setPanelBrightness(in int level);
-  int getPanelBrightness();
-  void minHdcpEncryptionLevelChanged(in vendor.qti.hardware.display.config.DisplayType dpy, in int minEncLevel);
-  void refreshScreen();
-  void controlPartialUpdate(in vendor.qti.hardware.display.config.DisplayType dpy, in boolean enable);
-  void toggleScreenUpdate(in boolean on);
-  void setIdleTimeout(in int value);
-  vendor.qti.hardware.display.config.HDRCapsParams getHDRCapabilities(in vendor.qti.hardware.display.config.DisplayType dpy);
-  void setCameraLaunchStatus(in int on);
-  boolean displayBWTransactionPending();
-  void setDisplayAnimating(in long displayId, in boolean animating);
-  void controlIdlePowerCollapse(in boolean enable, in boolean synchronous);
-  boolean getWriteBackCapabilities();
-  void setDisplayDppsAdROI(in int displayId, in int hStart, in int hEnd, in int vStart, in int vEnd, in int factorIn, in int factorOut);
-  void updateVSyncSourceOnPowerModeOff();
-  void updateVSyncSourceOnPowerModeDoze();
-  void setPowerMode(in int dispId, in vendor.qti.hardware.display.config.PowerMode powerMode);
-  boolean isPowerModeOverrideSupported(in int dispId);
-  boolean isHDRSupported(in int dispId);
-  boolean isWCGSupported(in int dispId);
-  void setLayerAsMask(in int dispId, in long layerId);
-  String getDebugProperty(in String propName);
-  vendor.qti.hardware.display.config.Attributes getActiveBuiltinDisplayAttributes();
-  void setPanelLuminanceAttributes(in int dispId, in float minLum, in float maxLum);
-  boolean isBuiltInDisplay(in int dispId);
-  boolean isAsyncVDSCreationSupported();
-  void createVirtualDisplay(in int width, in int height, in int format);
-  long[] getSupportedDSIBitClks(in int dispId);
-  long getDSIClk(in int dispId);
-  void setDSIClk(in int dispId, in long bitClk);
-  void setCWBOutputBuffer(in vendor.qti.hardware.display.config.IDisplayConfigCallback callback, in int dispId, in vendor.qti.hardware.display.config.Rect rect, in boolean postProcessed, in android.hardware.common.NativeHandle buffer);
-  void setQsyncMode(in int dispId, in vendor.qti.hardware.display.config.QsyncMode mode);
-  boolean isSmartPanelConfig(in int dispId, in int configId);
-  boolean isRotatorSupportedFormat(in int halFormat, in boolean ubwc);
-  void controlQsyncCallback(in boolean enable);
-  void sendTUIEvent(in vendor.qti.hardware.display.config.DisplayType dpy, in vendor.qti.hardware.display.config.TUIEventType eventType);
-  int getDisplayHwId(in int dispId);
-  int[] getSupportedDisplayRefreshRates(in vendor.qti.hardware.display.config.DisplayType dpy);
-  boolean isRCSupported(in int dispId);
-  void controlIdleStatusCallback(in boolean enable);
-  boolean isSupportedConfigSwitch(in int dispId, in int config);
-  vendor.qti.hardware.display.config.DisplayType getDisplayType(in long physicalDispId);
-  void setCameraSmoothInfo(in vendor.qti.hardware.display.config.CameraSmoothOp op, in int fps);
-  long registerCallback(in vendor.qti.hardware.display.config.IDisplayConfigCallback callback);
-  void unRegisterCallback(in long handle);
-  void notifyDisplayIdleState(in int[] dispId);
-  void setClientUp();
-  int getDisplayPortId(in int dispId);
+interface IDisplayConfigCallback {
+  oneway void notifyCWBBufferDone(in int error, in android.hardware.common.NativeHandle buffer);
+  oneway void notifyQsyncChange(in boolean qsyncEnabled, in int refreshRate, in int qsyncRefreshRate);
+  oneway void notifyIdleStatus(in boolean isIdle);
+  oneway void notifyCameraSmoothInfo(in vendor.qti.hardware.display.config.CameraSmoothOp op, in int fps);
+  oneway void notifyResolutionChange(in int displayId, in vendor.qti.hardware.display.config.Attributes attr);
+  oneway void notifyFpsMitigation(in int displayId, in vendor.qti.hardware.display.config.Attributes attr, in vendor.qti.hardware.display.config.Concurrency concurrency);
+  oneway void notifyTUIEventDone(in int error, in vendor.qti.hardware.display.config.DisplayType disp_type, in vendor.qti.hardware.display.config.TUIEventType eventType);
 }
