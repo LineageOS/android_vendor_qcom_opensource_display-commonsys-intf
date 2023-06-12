@@ -76,6 +76,7 @@
 #include <string>
 
 #define TIMED_RENDERING_METADATA_FEATURE 1
+#define FRC_FRAME_PACING_FEATURE 1
 
 namespace smomo {
 
@@ -112,6 +113,7 @@ struct SmomoBufferStats {
   nsecs_t dequeue_latency;  // last dequeue duration
   int64_t key;  // buffer identity
   buffer_handle_t buffer_hnd;  // layer buffer handle
+  uint64_t frame_number;
 };
 
 enum DisplayType {
