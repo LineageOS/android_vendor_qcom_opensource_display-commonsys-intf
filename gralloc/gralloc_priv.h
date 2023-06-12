@@ -72,9 +72,10 @@
 #define MAP_FB_MEMORY_PROP                   GRALLOC_PROP("map_fb_memory")
 #define USE_SYSTEM_HEAP_FOR_SENSORS          GRALLOC_PROP("use_system_heap_for_sensors")
 
+#define UINT(exp) static_cast<unsigned int>(exp)
 #define ROUND_UP_PAGESIZE(x) roundUpToPageSize(x)
 inline size_t roundUpToPageSize(size_t x) {
-  return (x + (getpagesize() - 1)) & ~(getpagesize() - 1);
+  return (x + (UINT(getpagesize()) - 1)) & ~(UINT(getpagesize()) - 1);
 }
 
 /* Legacy gralloc1 definitions */
