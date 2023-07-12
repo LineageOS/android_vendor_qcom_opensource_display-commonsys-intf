@@ -224,7 +224,7 @@ struct private_handle_t : public native_handle_t {
     auto *hnd = static_cast<const private_handle_t *>(h);
     if (!h || h->version != sizeof(native_handle) || h->numInts != NumInts() ||
         h->numFds != kNumFds) {
-      ALOGE("Invalid gralloc handle (at %p): ver(%d/%zu) ints(%d/%d) fds(%d/%d)", h,
+      ALOGW("Invalid gralloc handle (at %p): ver(%d/%zu) ints(%d/%d) fds(%d/%d)", h,
             h ? h->version : -1, sizeof(native_handle), h ? h->numInts : -1, NumInts(),
             h ? h->numFds : -1, kNumFds);
       return -1;
