@@ -146,6 +146,7 @@ struct MetaData_t {
   /* Video transcode stat populated by video decoder */
   struct VideoTranscodeStatsMetadata video_transcode_stats;
   int32_t videoEarlyNotifyLineCount;
+  char heapName[MAX_NAME_LEN];
 };
 
 namespace qtigralloc {

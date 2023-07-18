@@ -138,6 +138,7 @@ static const MetadataType MetadataType_RgbDataAddress = {VENDOR_QTI, QTI_RGB_DAT
 static const MetadataType MetadataType_ColorSpace = {VENDOR_QTI, QTI_COLORSPACE};
 static const MetadataType MetadataType_YuvPlaneInfo = {VENDOR_QTI, QTI_YUV_PLANE_INFO};
 static const MetadataType MetadataType_BufferPermission = {VENDOR_QTI, QTI_BUFFER_PERMISSION};
+static const MetadataType MetadataType_HeapName = {VENDOR_QTI, QTI_HEAP_NAME};
 static const MetadataType MetadataType_MemHandle = {VENDOR_QTI, QTI_MEM_HANDLE};
 
 static const MetadataType MetadataType_TimedRendering = {VENDOR_QTI, QTI_TIMED_RENDERING};

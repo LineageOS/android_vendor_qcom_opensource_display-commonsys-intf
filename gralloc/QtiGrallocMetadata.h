@@ -79,6 +79,8 @@
 #define QTI_VIDEO_TRANSCODE_STATS 10030
 // Early Notify line count
 #define QTI_EARLYNOTIFY_LINECOUNT 10031
+// Heap Name
+#define QTI_HEAP_NAME 10032
 // Used to indicate to framework that internal definitions are used instead
 #define COMPRESSION_QTI_UBWC 20001
 #define INTERLACED_QTI 20002
