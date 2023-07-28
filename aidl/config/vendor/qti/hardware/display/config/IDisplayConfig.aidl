@@ -47,6 +47,7 @@ import vendor.qti.hardware.display.config.Rect;
 import vendor.qti.hardware.display.config.TUIEventType;
 import vendor.qti.hardware.display.config.CameraSmoothOp;
 import vendor.qti.hardware.display.config.CacV2Config;
+import vendor.qti.hardware.display.config.CacV2ConfigExt;
 
 @VintfStability
 interface IDisplayConfig {
@@ -612,4 +613,17 @@ interface IDisplayConfig {
      */
     void configureCacV2PerEye(in int dispId, in CacV2Config leftConfig, in CacV2Config rightConfig,
                               in boolean enable);
+
+    /*
+     * Configure CAC V2 to HWC HAL with the lens center offsets for a given display ID per eye
+     *
+     * @param dispId display ID
+     * @param leftconfig CAC configuration parameters for left eye
+     * @param rightconfig CAC configuration parameters for right eye
+     * @param enable control CAC enable/disable
+     *
+     * @return error is NONE upon success
+     */
+    void configureCacV2ExtPerEye(in int dispId, in CacV2ConfigExt leftConfig,
+                                 in CacV2ConfigExt rightConfig, in boolean enable);
 }

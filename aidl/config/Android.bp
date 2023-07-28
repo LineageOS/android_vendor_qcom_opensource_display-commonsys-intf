@@ -55,6 +55,10 @@ aidl_interface {
             version: "9",
             imports: ["android.hardware.common-V2"],
         },
+        {
+            version: "10",
+            imports: ["android.hardware.common-V2"],
+        },
 
     ],
     frozen: true,
