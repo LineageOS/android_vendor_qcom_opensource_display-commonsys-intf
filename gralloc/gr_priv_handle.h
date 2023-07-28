@@ -19,39 +19,8 @@
 
 /*
 * Changes from Qualcomm Innovation Center are provided under the following license:
-*
-* Copyright (c) 2022 Qualcomm Innovation Center, Inc. All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted (subject to the limitations in the
-* disclaimer below) provided that the following conditions are met:
-*
-*    * Redistributions of source code must retain the above copyright
-*      notice, this list of conditions and the following disclaimer.
-*
-*    * Redistributions in binary form must reproduce the above
-*      copyright notice, this list of conditions and the following
-*      disclaimer in the documentation and/or other materials provided
-*      with the distribution.
-*
-*    * Neither the name of Qualcomm Innovation Center, Inc. nor the
-*      names of its contributors may be used to endorse or promote
-*      products derived from this software without specific prior
-*      written permission.
-*
-* NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE
-* GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
-* HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
-* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-* MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-* IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
-* ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
-* GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-* INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-* IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-* OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
-* IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+* Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+* SPDX-License-Identifier: BSD-3-Clause-Clear
 */
 
 #ifndef __GR_PRIV_HANDLE_H__
@@ -130,9 +99,12 @@ struct private_handle_t {
   uint64_t base_metadata;
   uint64_t gpuaddr;
   unsigned int reserved_size;
+  unsigned int custom_content_md_reserved_size;
 #ifdef __cplusplus
   static const int kNumFds = 2;
   static const int kMagic = 'gmsm';
+  unsigned int linear_size;
+  int ubwcp_format;
 
   static inline int NumInts() {
     return ((sizeof(private_handle_t) - sizeof(native_handle_t)) / sizeof(int)) - kNumFds;
@@ -159,7 +131,10 @@ struct private_handle_t {
         base(0),
         base_metadata(0),
         gpuaddr(0),
-        reserved_size(0) {
+        reserved_size(0),
+        linear_size(0),
+        ubwcp_format(format),
+        custom_content_md_reserved_size(0) {
     version = static_cast<int>(sizeof(native_handle));
     numInts = NumInts();
     numFds = kNumFds;
@@ -200,10 +175,11 @@ struct private_handle_t {
   static void Dump(const private_handle_t *hnd) {
     ALOGD("handle id:%" PRIu64
           " wxh:%dx%d uwxuh:%dx%d size: %d fd:%d fd_meta:%d flags:0x%x "
-          "usage:0x%" PRIx64 "  format:0x%x layer_count: %d reserved_size = %d",
+          "usage:0x%" PRIx64 "  format:0x%x layer_count: %d reserved_size = %d "
+          "custom_content_md_reserved_size = %u",
           hnd->id, hnd->width, hnd->height, hnd->unaligned_width, hnd->unaligned_height, hnd->size,
           hnd->fd, hnd->fd_metadata, hnd->flags, hnd->usage, hnd->format, hnd->layer_count,
-          hnd->reserved_size);
+          hnd->reserved_size, hnd->custom_content_md_reserved_size);
   }
 
   int GetUnalignedWidth() const { return unaligned_width; }
