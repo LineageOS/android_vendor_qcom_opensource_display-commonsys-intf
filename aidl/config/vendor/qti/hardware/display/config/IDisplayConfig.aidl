@@ -626,4 +626,13 @@ interface IDisplayConfig {
      */
     void configureCacV2ExtPerEye(in int dispId, in CacV2ConfigExt leftConfig,
                                  in CacV2ConfigExt rightConfig, in boolean enable);
+
+    /*
+     * Allow idle fallback
+     *
+     * @param NONE
+     *
+     * @return error is NONE upon success
+     */
+    void allowIdleFallback();
 }
