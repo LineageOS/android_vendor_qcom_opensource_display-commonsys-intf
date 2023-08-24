@@ -162,6 +162,8 @@ static const aidl::android::hardware::graphics::common::ExtendableType
     PlaneLayoutComponentType_Raw = {VENDOR_QTI, PLANE_COMPONENT_TYPE_RAW};
 static const aidl::android::hardware::graphics::common::ExtendableType
     PlaneLayoutComponentType_Meta = {VENDOR_QTI, PLANE_COMPONENT_TYPE_META};
+static const aidl::android::hardware::graphics::common::ExtendableType
+    PlaneLayoutComponentType_Blob = {VENDOR_QTI, PLANE_COMPONENT_TYPE_BLOB};
 
 Error decodeMetadataState(hidl_vec<uint8_t> &in, bool *out);
 Error encodeMetadataState(bool *in, hidl_vec<uint8_t> *out);
