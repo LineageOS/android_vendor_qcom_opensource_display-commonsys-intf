@@ -95,6 +95,8 @@ class DisplayExtnIntf {
   virtual void RegisterDisplay(uint32_t display_id) = 0;
   virtual void UnregisterDisplay(uint32_t display_id) = 0;
   virtual int SetActiveConfig(uint32_t display_id, uint32_t config_id) = 0;
+  virtual void SetSupportedRefreshRates(std::vector<float> fps_list) = 0;
+  virtual void NotifyDisplayUpdateImminent() = 0;
   virtual int NotifyEarlyWakeUp(bool gpu, bool display) = 0;
   virtual int NotifyDisplayEarlyWakeUp(uint32_t display_id) = 0;
   virtual int SetEarlyWakeUpConfig(uint32_t display_id, bool enable) = 0;
