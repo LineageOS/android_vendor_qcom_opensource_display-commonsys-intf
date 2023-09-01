@@ -109,6 +109,4 @@ interface IDisplayConfig {
   boolean isCacV2Supported(in int dispId);
   void configureCacV2(in int dispId, in vendor.qti.hardware.display.config.CacV2Config config, in boolean enable);
   void configureCacV2PerEye(in int dispId, in vendor.qti.hardware.display.config.CacV2Config leftConfig, in vendor.qti.hardware.display.config.CacV2Config rightConfig, in boolean enable);
-  void configureCacV2ExtPerEye(in int dispId, in vendor.qti.hardware.display.config.CacV2ConfigExt leftConfig, in vendor.qti.hardware.display.config.CacV2ConfigExt rightConfig, in boolean enable);
-  void allowIdleFallback();
 }

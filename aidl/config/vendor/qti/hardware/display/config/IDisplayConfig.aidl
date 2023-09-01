@@ -27,39 +27,9 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 /*
-*  Changes from Qualcomm Innovation Center are provided under the following license:
- *
- *  Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without
- *  modification, are permitted (subject to the limitations in the
- *  disclaimer below) provided that the following conditions are met:
- *
- *      * Redistributions of source code must retain the above copyright
- *        notice, this list of conditions and the following disclaimer.
- *
- *      * Redistributions in binary form must reproduce the above
- *        copyright notice, this list of conditions and the following
- *        disclaimer in the documentation and/or other materials provided
- *        with the distribution.
- *
- *      * Neither the name of Qualcomm Innovation Center, Inc. nor the names of its
- *        contributors may be used to endorse or promote products derived
- *        from this software without specific prior written permission.
- *
- *  NO EXPRESS OR IMPLIED LICENSES TO ANY PARTY'S PATENT RIGHTS ARE
- *  GRANTED BY THIS LICENSE. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT
- *  HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
- *   WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
- *  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
- *  IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
- *  ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- *  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
- *  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- *  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
- *  IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
- *  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
- *  IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 package vendor.qti.hardware.display.config;
 
@@ -76,6 +46,8 @@ import vendor.qti.hardware.display.config.QsyncMode;
 import vendor.qti.hardware.display.config.Rect;
 import vendor.qti.hardware.display.config.TUIEventType;
 import vendor.qti.hardware.display.config.CameraSmoothOp;
+import vendor.qti.hardware.display.config.CacV2Config;
+import vendor.qti.hardware.display.config.CacV2ConfigExt;
 
 @VintfStability
 interface IDisplayConfig {
@@ -608,4 +580,59 @@ interface IDisplayConfig {
      * @return display port ID
      */
     int getDisplayPortId(in int dispId);
+
+    /*
+     * Query if CAC V2 is supported on the display.
+     *
+     * @param dispId display ID
+     *
+     * @return true if supported, false otherwise
+     */
+    boolean isCacV2Supported(in int dispId);
+
+    /*
+     * Configure CAC V2 to HWC HAL for a given display ID
+     *
+     * @param dispId display ID
+     * @param config CAC configuration parameters
+     * @param enable control CAC enable/disable
+     *
+     * @return error is NONE upon success
+     */
+    void configureCacV2(in int dispId, in CacV2Config config, in boolean enable);
+
+    /*
+     * Configure CAC V2 to HWC HAL for a given display ID per eye
+     *
+     * @param dispId display ID
+     * @param leftconfig CAC configuration parameters for left eye
+     * @param rightconfig CAC configuration parameters for right eye
+     * @param enable control CAC enable/disable
+     *
+     * @return error is NONE upon success
+     */
+    void configureCacV2PerEye(in int dispId, in CacV2Config leftConfig, in CacV2Config rightConfig,
+                              in boolean enable);
+
+    /*
+     * Configure CAC V2 to HWC HAL with the lens center offsets for a given display ID per eye
+     *
+     * @param dispId display ID
+     * @param leftconfig CAC configuration parameters for left eye
+     * @param rightconfig CAC configuration parameters for right eye
+     * @param enable control CAC enable/disable
+     *
+     * @return error is NONE upon success
+     */
+    void configureCacV2ExtPerEye(in int dispId, in CacV2ConfigExt leftConfig,
+                                 in CacV2ConfigExt rightConfig, in boolean enable);
+
+    /*
+     * Allow idle fallback
+     *
+     * @param NONE
+     *
+     * @return error is NONE upon success
+     */
+    void allowIdleFallback();
 }
