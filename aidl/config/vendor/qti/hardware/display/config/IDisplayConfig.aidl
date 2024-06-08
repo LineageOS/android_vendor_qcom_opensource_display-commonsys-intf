@@ -635,4 +635,14 @@ interface IDisplayConfig {
      * @return error is NONE upon success
      */
     void allowIdleFallback();
+
+    /*
+     * Set the App content fps
+     *
+     * @param name App package name
+     * @param fps App content fps
+     *
+     * @return error is NONE upon success
+     */
+    void setContentFps(in String name, in int fps);
 }

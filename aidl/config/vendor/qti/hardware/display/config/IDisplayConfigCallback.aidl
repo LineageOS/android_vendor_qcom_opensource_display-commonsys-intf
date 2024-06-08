@@ -133,4 +133,12 @@ interface IDisplayConfigCallback {
      */
     oneway void notifyTUIEventDone(in int error, in DisplayType disp_type,
                                    in TUIEventType eventType);
+
+    /*
+     * Send notification about App content fps.
+     *
+     * @param name App package name
+     * @param fps App content fps
+     */
+    oneway void notifyContentFps(in String name, in int fps);
 }
