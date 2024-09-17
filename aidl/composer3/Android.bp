@@ -1,13 +1,62 @@
+soong_config_module_type {
+    name: "qtidisplaycommonsys_composer_cc_defaults",
+    module_type: "aidl_interface_defaults",
+    config_namespace: "qtidisplaycommonsys",
+    variables: ["qticomposerversion"],
+    properties: [
+        "imports",
+        "versions_with_info",
+    ],
+}
+
+soong_config_string_variable {
+    name: "qticomposerversion",
+    values: ["composer3_v2", "composer3_v3", "composer3_v4"],
+}
+
+qtidisplaycommonsys_composer_cc_defaults {
+    name: "qtidisplaycommonsys_composer_defaults",
+    soong_config_variables: {
+        qticomposerversion: {
+            composer3_v4: {
+                imports: ["android.hardware.graphics.composer3-V4"],
+                versions_with_info: [
+                    {
+                        version: "1",
+                        imports: ["android.hardware.graphics.composer3-V4"],
+                    }
+                ],
+            },
+            composer3_v3: {
+                imports: ["android.hardware.graphics.composer3-V3"],
+                versions_with_info: [
+                    {
+                        version: "1",
+                        imports: ["android.hardware.graphics.composer3-V3"],
+                    }
+                ],
+            },
+            conditions_default: {
+                imports: ["android.hardware.graphics.composer3-V2"],
+                versions_with_info: [
+                    {
+                        version: "1",
+                        imports: ["android.hardware.graphics.composer3-V2"],
+                    }
+                ],
+            },
+        }
+    }
+}
+
 aidl_interface {
     name: "vendor.qti.hardware.display.composer3",
+    defaults: ["qtidisplaycommonsys_composer_defaults"],
     vendor_available: true,
     srcs: [
         "vendor/qti/hardware/display/composer3/*.aidl",
     ],
     stability: "vintf",
-    imports: [
-        "android.hardware.graphics.composer3-V3",
-    ],
     backend: {
         java: {
             enabled: false,
@@ -18,12 +67,5 @@ aidl_interface {
     },
 
     owner: "qti",
-    versions_with_info: [
-        {
-            version: "1",
-            imports: ["android.hardware.graphics.composer3-V3"],
-        },
-    ],
     frozen: true,
-
 }
