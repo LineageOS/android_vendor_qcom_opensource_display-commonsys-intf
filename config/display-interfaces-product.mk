@@ -36,3 +36,30 @@ PRODUCT_PACKAGES += vendor.qti.hardware.display.allocator@1.0.vendor \
                     vendor.qti.hardware.display.composer3-V1-ndk.vendor \
                     vendor.qti.hardware.display.aiqe-V1-ndk \
                     vendor.qti.hardware.display.aiqe-V2-ndk
+
+$(call soong_config_set, qtidisplaycommonsys, qticomposerversion, composer3_v3)
+
+# Enable conditional compilation for HWC's version in the system image.
+# Properly determine the system image version to select the appropriate version for the internal
+# composer's interface. Two key build properties are PLATFORM_VERSION_CODENAME and PLATFORM_VERSION.
+# PLATFORM_VERSION_CODENAME holds the string codename of the current Android version.
+# PLATFORM_VERSION contains the version number of the current Android version, which matches
+# PLATFORM_VERSION_CODENAME until the FRC stage.
+# Example:
+# Android V (After FRC)
+#   PLATFORM_VERSION_CODENAME = VanillaIceCream, PLATFORM_VERSION = 15
+# Android W (Before FRC)
+#   PLATFORM_VERSION_CODENAME = W, PLATFORM_VERSION = W
+# Android W (After FRC)
+#   PLATFORM_VERSION_CODENAME = W, PLATFORM_VERSION = 16
+
+# TODO: Update VanillaIceCream to Android W's code name and update version number below
+ifeq ($(PLATFORM_VERSION_CODENAME), $(PLATFORM_VERSION))
+    ifeq ($(PLATFORM_VERSION), $(filter $(PLATFORM_VERSION), VanillaIceCream))
+        $(call soong_config_set, qtidisplaycommonsys, qticomposerversion, composer3_v4)
+    endif
+else
+    ifeq ($(PLATFORM_VERSION), $(filter $(PLATFORM_VERSION), VanillaIceCream 15))
+        $(call soong_config_set, qtidisplaycommonsys, qticomposerversion, composer3_v3)
+    endif
+endif
