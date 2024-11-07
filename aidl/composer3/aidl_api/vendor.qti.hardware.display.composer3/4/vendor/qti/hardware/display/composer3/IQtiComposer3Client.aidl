@@ -21,8 +21,8 @@
 // later when a module using the interface is updated, e.g., Mainline modules.
 
 package vendor.qti.hardware.display.composer3;
-@Backing(type="long") @VintfStability
-enum QtiLayerFlags {
-  DEFAULT = 0x0,
-  COMPATIBLE = 0x1,
+@VintfStability
+interface IQtiComposer3Client {
+  android.hardware.graphics.composer3.CommandResultPayload[] qtiExecuteCommands(in android.hardware.graphics.composer3.DisplayCommand[] commands, in vendor.qti.hardware.display.composer3.QtiDisplayCommand[] qtiCommands);
+  void qtiTryDrawMethod(long display, vendor.qti.hardware.display.composer3.QtiDrawMethod drawMethod);
 }

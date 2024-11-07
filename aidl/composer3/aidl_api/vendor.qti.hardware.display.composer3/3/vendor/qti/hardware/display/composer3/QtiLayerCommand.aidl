@@ -21,8 +21,9 @@
 // later when a module using the interface is updated, e.g., Mainline modules.
 
 package vendor.qti.hardware.display.composer3;
-@Backing(type="long") @VintfStability
-enum QtiLayerFlags {
-  DEFAULT = 0x0,
-  COMPATIBLE = 0x1,
+@VintfStability
+parcelable QtiLayerCommand {
+  long layer;
+  vendor.qti.hardware.display.composer3.QtiLayerType qtiLayerType;
+  vendor.qti.hardware.display.composer3.QtiLayerFlags qtiLayerFlags;
 }
