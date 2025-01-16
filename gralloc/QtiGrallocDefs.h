@@ -54,7 +54,7 @@
 /* This flag is used to indicate 10 bit format.
  * When both GRALLOC_USAGE_PRIVATE_ALLOC_UBWC & GRALLOC_USAGE_PRIVATE_10BIT
  * are set then it will indicate UBWC_TP10 format.
- * When only GRALLOC_USAGE_PRIVATE_10BIT is set it will indicate linear P010 format.
+ * When only GRALLOC_USAGE_PRIVATE_10BIT is set it will indicate linear P010/P210 format.
  */
 #define GRALLOC_USAGE_PRIVATE_10BIT (UINT32_C(1) << 30)
 
@@ -137,6 +137,8 @@
 #define HAL_PIXEL_FORMAT_YCbCr_420_P010 0x36  // HAL_PIXEL_FORMAT_YCBCR_P010
 #define HAL_PIXEL_FORMAT_YCbCr_420_P010_UBWC 0x124
 #define HAL_PIXEL_FORMAT_YCbCr_420_P010_VENUS 0x7FA30C0A
+#define HAL_PIXEL_FORMAT_YCbCr_422_P210_UBWC 0x133
+#define HAL_PIXEL_FORMAT_YCbCr_422_P210 0x3c
 
 #define HAL_PIXEL_FORMAT_CbYCrY_422_I 0x120
 #define HAL_PIXEL_FORMAT_BGR_888 0x121
