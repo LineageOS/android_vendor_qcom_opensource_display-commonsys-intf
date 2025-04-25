@@ -33,6 +33,24 @@
       "message": "It now works with the new patchset in hw/qcom-caf/common.",
       "revId": "88cf651093fff43fda13a82cd4e41ceb008aa4d6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e26cec_0ce88082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2025-04-25T21:04:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3e83f3c_1d8a69c8",
+      "revId": "88cf651093fff43fda13a82cd4e41ceb008aa4d6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
