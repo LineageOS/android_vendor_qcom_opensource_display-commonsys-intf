@@ -1,11 +1,10 @@
-/*
- * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause-Clear
- */
+// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// SPDX-License-Identifier: BSD-3-Clause-Clear
 
 #ifndef __COMMON_METADATATYPE_H__
 #define __COMMON_METADATATYPE_H__
-namespace gralloc{
+namespace gralloc {
+
 typedef enum vendor_qti_hardware_display_common_MetadataType {
   METADATA_TYPE_INVALID = 0,
   /**
@@ -67,7 +66,7 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
   USAGE = 9,
   /**
    * Size in bytes of memory allocated for buffer, including metadata and
-   * padding. This does not change for the lifetime of the buffer. 
+   * padding. This does not change for the lifetime of the buffer.
    * Functions supported: getMetadata
    */
   ALLOCATION_SIZE = 10,
@@ -142,7 +141,7 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
   PP_PARAM_INTERLACED = 10002,
   /**
    * Set by camera to indicate buffer will be used for high performance video
-   * use case. 
+   * use case.
    * Functions supported: getMetadata, setMetadata
    */
   VIDEO_PERF_MODE = 10003,
@@ -175,7 +174,7 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
   LINEAR_FORMAT = 10008,
   /**
    * Set by graphics to indicate that this buffer will be written to but not
-   * swapped out. 
+   * swapped out.
    * Functions supported: getMetadata, setMetadata
    */
   SINGLE_BUFFER_MODE = 10009,
@@ -243,7 +242,7 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
    * Indicates buffer access permission for a client,
    * where permissions are defined in
    * vendor_qti_hardware_display_common_BufferPermission and clients are defined
-   * in vendor_qti_hardware_display_common_BufferClient 
+   * in vendor_qti_hardware_display_common_BufferClient
    * Functions supported: getMetadata, setMetadata
    */
   BUFFER_PERMISSION = 10026,
@@ -277,7 +276,7 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
   /**
    * Additional shared memory in buffer, outside of content and metadata,
    * for client use. Defined in
-   * vendor_qti_hardware_display_common_ReservedRegion 
+   * vendor_qti_hardware_display_common_ReservedRegion
    * Functions supported: getMetadata
    */
   RESERVED_REGION = 10032,
@@ -370,7 +369,23 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
    * Functions supported: getMetadata
    */
   MULTI_VIEW_INFO = 10048,
+  /**
+   * Three Dimensional Reference Display Info
+   * Functions supported: getMetadata, setMetadata
+   */
+  THREE_DIMENSIONAL_REF_INFO = 10049,
+  /**
+   * SMPTE2094_10 metadata,
+   * Functions supported: getMetadata, setMetadata
+   */
+  SMPTE2094_10 = 10050,
+  /**
+   * VIEW_ID metadata,
+   * Functions supported: getMetadata, setMetadata
+   */
+  VIEW_ID = 10051
 
 } vendor_qti_hardware_display_common_MetadataType;
-};
+
+};  // namespace gralloc
 #endif  // __COMMON_METADATATYPE_H__
