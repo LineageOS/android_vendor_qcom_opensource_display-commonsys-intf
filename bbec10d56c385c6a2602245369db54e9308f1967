@@ -16,6 +16,23 @@
       "message": "Fixes booting on DISPLAY.LA.4.0.r2-08600-lanai.0 blobs",
       "revId": "bbec10d56c385c6a2602245369db54e9308f1967",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "190fc6f4_b1604d5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29415
+      },
+      "writtenOn": "2025-08-18T20:17:52Z",
+      "side": 1,
+      "message": "Should be guarded since it\u0027s included in PPDETuningCfgData",
+      "revId": "bbec10d56c385c6a2602245369db54e9308f1967",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
