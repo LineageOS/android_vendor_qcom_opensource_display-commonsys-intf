@@ -13,6 +13,9 @@ cc_library_headers {
     }) + select(soong_config_variable("qtidisplay", "gralloc_handle_has_ubwcp_format"), {
         "true": ["-DGRALLOC_HANDLE_HAS_UBWCP_FORMAT"],
         default: [],
+    }) + select(soong_config_variable("qtidisplay", "color_manager_sharpen_filter_cfg"), {
+        "true": ["-DCOLOR_MANAGER_SHARPEN_FILTER_CFG"],
+        default: [],
     }),
     export_include_dirs: [
         "gralloc",

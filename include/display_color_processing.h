@@ -178,9 +178,11 @@ struct PPDETuningCfg {
   uint32_t de_lpf_h;
   uint32_t de_lpf_m;
   uint32_t de_lpf_l;
+#ifdef COLOR_MANAGER_SHARPEN_FILTER_CFG
   int16_t sharpen_level1;
   int16_t sharpen_level2;
   PPDEScalingFilterConfig filter_config;
+#endif
 };
 
 struct PPDETuningCfgData {
