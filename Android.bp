@@ -7,4 +7,11 @@ cc_library_headers {
         "libqdmetadata",
         "services",
     ],
+    min_sdk_version: "34",
+    apex_available: [
+        "//apex_available:platform",
+        "com.google.display_safety.har",
+        "com.google.display_safety.har.update",
+        "com.google.display_safety.har.stub",
+    ],
 }
