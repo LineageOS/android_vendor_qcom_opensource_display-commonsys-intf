@@ -22,10 +22,7 @@
 
 package vendor.qti.hardware.display.composer3;
 @VintfStability
-parcelable QtiLayerCommand {
-  long layer;
-  vendor.qti.hardware.display.composer3.QtiLayerType qtiLayerType;
-  vendor.qti.hardware.display.composer3.QtiLayerFlags qtiLayerFlags;
-  @nullable vendor.qti.hardware.display.composer3.QtiPrivacyRegion[] qtiPrivacyRegions;
-  @nullable vendor.qti.hardware.display.composer3.QtiCornerRadius qtiCornerRadius;
+parcelable QtiPrivacyRegion {
+  float cornerRadius;
+  android.hardware.graphics.common.Rect rect;
 }
