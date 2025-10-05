@@ -17,4 +17,5 @@ PRODUCT_PACKAGES += vendor.display.config@1.0 \
                     vendor.qti.hardware.display.config-V11-ndk \
                     vendor.qti.hardware.display.config-V13-ndk \
                     vendor.qti.hardware.display.config-V14-ndk \
+                    vendor.qti.hardware.display.config-V15-ndk \
                     vendor.qti.hardware.display.snapallocext-V1-ndk
