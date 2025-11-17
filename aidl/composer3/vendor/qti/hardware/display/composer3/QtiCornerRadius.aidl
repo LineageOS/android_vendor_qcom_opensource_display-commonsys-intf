@@ -6,8 +6,7 @@
 package vendor.qti.hardware.display.composer3;
 
 @VintfStability
-@Backing(type="long")
-enum QtiLayerFlags {
-    DEFAULT = 0x0,
-    COMPATIBLE = 0x1,
+parcelable QtiCornerRadius {
+    float x;
+    float y;
 }
