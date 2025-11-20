@@ -38,16 +38,9 @@ aidl_interface {
                 "android.hardware.graphics.common-V7",
             ],
         },
-        {
-            version: "5",
-            imports: [
-                "android.hardware.graphics.composer3-V5",
-                "android.hardware.graphics.common-V7",
-            ],
-        },
 
     ],
 
     owner: "qti",
-    frozen: true,
+    frozen: false,
 }
