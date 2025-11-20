@@ -10,4 +10,5 @@ import android.hardware.graphics.common.Rect;
 parcelable QtiPrivacyRegion {
     float cornerRadius;
     Rect rect;
+    int index;
 }
