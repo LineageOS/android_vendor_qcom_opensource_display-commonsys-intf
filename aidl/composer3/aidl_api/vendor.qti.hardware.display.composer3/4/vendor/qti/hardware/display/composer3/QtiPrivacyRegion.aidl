@@ -25,4 +25,5 @@ package vendor.qti.hardware.display.composer3;
 parcelable QtiPrivacyRegion {
   float cornerRadius;
   android.hardware.graphics.common.Rect rect;
+  int index;
 }
