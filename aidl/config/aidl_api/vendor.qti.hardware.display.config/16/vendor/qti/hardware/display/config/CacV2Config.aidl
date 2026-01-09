@@ -1,12 +1,11 @@
 /*
- * Changes from Qualcomm Technologies, Inc. are provided under the following license:
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  *//**
- * @file PoseConfigType.aidl
- * @brief Defines the different types of pose config test or real config
+ * @file CacV2Config.aidl
+ * @brief Struct for the CAC V2 configurations
  *
- * This enumeration states the different types of display ports supported.
+ * This structure holds the configuration parameters for the CAC V2 algorithm.
  */
 ///////////////////////////////////////////////////////////////////////////////
 // THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
@@ -27,8 +26,12 @@
 // later when a module using the interface is updated, e.g., Mainline modules.
 
 package vendor.qti.hardware.display.config;
-@Backing(type="int") @VintfStability
-enum PoseConfigType {
-  TEST = 0,
-  REAL = 1,
+@VintfStability
+parcelable CacV2Config {
+  double k0r;
+  double k1r;
+  double k0b;
+  double k1b;
+  double pixel_pitch;
+  double normalization;
 }
