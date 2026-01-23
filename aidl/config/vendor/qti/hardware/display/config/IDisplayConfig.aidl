@@ -58,6 +58,7 @@ import vendor.qti.hardware.display.config.CameraSmoothOp;
 import vendor.qti.hardware.display.config.CacV2Config;
 import vendor.qti.hardware.display.config.CacV2ConfigExt;
 import vendor.qti.hardware.display.config.ICwbControlConst;
+import vendor.qti.hardware.display.config.PoseConfigType;
 
 @VintfStability
 /**
@@ -680,4 +681,46 @@ interface IDisplayConfig {
      */
     void setCWBOutputBufferV2(in IDisplayConfigCallback callback, in int dispId, in Rect roiRect,
                               in Rect downscaleRect, in int cwbControlFlag, in NativeHandle buffer);
+
+    /*
+     * call function to start tunnelling
+     * @return error as NONE if vendor.display.enable_tunnelling is set to true
+     * @return relevant error code otherwise
+    */
+    int tunnellingInit();
+
+    /*
+    *  deinit tunnelling
+    * @return error as NONE always
+    */
+    int tunnellingDeinit();
+
+    /*
+    * dequeue the buffer
+    *
+    * @return the release_fence_handle corresponding to the input buffer handle
+    * @return relevant error code if ion_fd is not present
+    */
+    int dequeueTunnelledBuffer(in NativeHandle buffer_handle,
+                               out NativeHandle release_fence_handle);
+
+    /*
+    * validate display and show the content of the buffer on screen
+    *
+    * @return error as NONE on success
+    * @return relevant error code otherwise
+    */
+    int queueTunnelledBuffer(in NativeHandle buffer_handle,
+                             in NativeHandle acquire_fence_handle);
+
+    /*
+    * @brief Set the Pose config for late stage reprojection
+    *
+    * @param dispId display ID
+    * @param buffer_handle buffer_handle of the pose buffer
+    * @param configType pose config type
+    *
+    * @return error is NONE upon success
+    */
+    void setPoseConfig(in int dispId, in NativeHandle bufferHandle, in PoseConfigType configType);
 }

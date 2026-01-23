@@ -124,5 +124,4 @@ interface IDisplayConfig {
   int tunnellingDeinit();
   int dequeueTunnelledBuffer(in android.hardware.common.NativeHandle buffer_handle, out android.hardware.common.NativeHandle release_fence_handle);
   int queueTunnelledBuffer(in android.hardware.common.NativeHandle buffer_handle, in android.hardware.common.NativeHandle acquire_fence_handle);
-  void setPoseConfig(in int dispId, in android.hardware.common.NativeHandle bufferHandle, in vendor.qti.hardware.display.config.PoseConfigType configType);
 }
