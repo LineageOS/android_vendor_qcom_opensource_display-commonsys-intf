@@ -723,4 +723,15 @@ interface IDisplayConfig {
     * @return error is NONE upon success
     */
     void setPoseConfig(in int dispId, in NativeHandle bufferHandle, in PoseConfigType configType);
+
+    /**
+     * @brief Set the HDR capabilities of a given display type.
+     * This API MUST be called before createVirtualDisplay is called.
+     *
+     * @param dpy display type
+     * @param caps HDR capabilities
+     *
+     * @return error is NONE upon success
+     */
+    void setHDRCapabilities(in DisplayType dpy, in HDRCapsParams caps);
 }
