@@ -25,6 +25,9 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
 #ifndef __LAYER_EXTN_INTF_H__
@@ -34,6 +37,7 @@
 
 #include <vector>
 #include <string>
+#include <map>
 
 namespace composer {
 
@@ -50,7 +54,14 @@ class LayerExtnIntf {
  public:
   virtual ~LayerExtnIntf() = default;
   virtual int GetLayerClass(const std::string &name) = 0;
+
+#if CONCURRENCY_DETECTION_CONFIG == 1
+  virtual void UpdateLayerState(const std::map<std::string, std::pair<int32_t, int32_t>>
+                                  &layerDispFrames) = 0;
+#else
   virtual void UpdateLayerState(const std::vector<std::string> &layers, int num_layers) = 0;
+#endif
+
 };
 
 typedef bool (*CreateLayerExtnInterface)(uint16_t version, LayerExtnIntf **interface);
