@@ -383,7 +383,12 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
    * VIEW_ID metadata,
    * Functions supported: getMetadata, setMetadata
    */
-  VIEW_ID = 10051
+  VIEW_ID = 10051,
+  /**
+   * Concurrent Write Back Metadata
+   * Functions supported: getMetadata, setMetadata
+   */
+  CWB_METADATA = 10052
 
 } vendor_qti_hardware_display_common_MetadataType;
 
