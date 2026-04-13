@@ -59,6 +59,7 @@ import vendor.qti.hardware.display.config.CacV2Config;
 import vendor.qti.hardware.display.config.CacV2ConfigExt;
 import vendor.qti.hardware.display.config.ICwbControlConst;
 import vendor.qti.hardware.display.config.PoseConfigType;
+import vendor.qti.hardware.display.config.DynamicCacV2Config;
 
 @VintfStability
 /**
@@ -734,4 +735,16 @@ interface IDisplayConfig {
      * @return error is NONE upon success
      */
     void setHDRCapabilities(in DisplayType dpy, in HDRCapsParams caps);
+
+
+    /**
+     * @brief Configure Dynamic CAC to HWC HAL for a given display ID
+     *
+     * @param dispId display ID
+     * @param config Dynamic CAC configuration parameters
+     * @param enable control Dynamic CAC enable/disable
+     *
+     * @return error is NONE upon success
+     */
+    void configureDynamicCacV2(in int dispId, in DynamicCacV2Config config, in boolean enable);
 }
