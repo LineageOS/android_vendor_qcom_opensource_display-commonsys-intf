@@ -393,8 +393,12 @@ typedef enum vendor_qti_hardware_display_common_MetadataType {
    * ROI metadata,
    * Functions supported: getMetadata, setMetadata
    */
-  ROI_RECT_METADATA = 10053
-
+  ROI_RECT_METADATA = 10053,
+  /**
+  * Custom tuning metadata,
+  * Functions supported: getMetadata, setMetadata
+  */
+  CUSTOM_TUNING_METADATA = 10055
 } vendor_qti_hardware_display_common_MetadataType;
 
 };  // namespace gralloc
