@@ -45,4 +45,5 @@ PRODUCT_PACKAGES += vendor.qti.hardware.display.allocator@1.0.vendor \
                     vendor.qti.hardware.display.aiqe-V1-ndk \
                     vendor.qti.hardware.display.aiqe-V2-ndk \
                     vendor.qti.hardware.display.aiqe-V3-ndk \
-                    vendor.qti.hardware.display.snapallocext-V1-ndk.vendor
+                    vendor.qti.hardware.display.snapallocext-V1-ndk.vendor \
+                    vendor.qti.hardware.qacs.ambientdatacapture-V1-ndk.vendor
