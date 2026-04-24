@@ -1,6 +1,11 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
+ *//**
+ * @file CacV2Config.aidl
+ * @brief Struct for the CAC V2 configurations
+ *
+ * This structure holds the configuration parameters for the CAC V2 algorithm.
  */
 ///////////////////////////////////////////////////////////////////////////////
 // THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
@@ -20,11 +25,13 @@
 // with such a backward incompatible change, it has a high risk of breaking
 // later when a module using the interface is updated, e.g., Mainline modules.
 
-package vendor.qti.hardware.display.composer3;
-@Backing(type="int") @VintfStability
-enum QtiLayerType {
-  UNKNOWN = 0,
-  APP = 1,
-  GAME = 2,
-  BROWSER = 3,
+package vendor.qti.hardware.display.config;
+@VintfStability
+parcelable CacV2Config {
+  double k0r;
+  double k1r;
+  double k0b;
+  double k1b;
+  double pixel_pitch;
+  double normalization;
 }

@@ -58,6 +58,7 @@ import vendor.qti.hardware.display.config.CameraSmoothOp;
 import vendor.qti.hardware.display.config.CacV2Config;
 import vendor.qti.hardware.display.config.CacV2ConfigExt;
 import vendor.qti.hardware.display.config.ICwbControlConst;
+import vendor.qti.hardware.display.config.PoseConfigType;
 
 @VintfStability
 /**
@@ -711,4 +712,15 @@ interface IDisplayConfig {
     */
     int queueTunnelledBuffer(in NativeHandle buffer_handle,
                              in NativeHandle acquire_fence_handle);
+
+    /*
+    * @brief Set the Pose config for late stage reprojection
+    *
+    * @param dispId display ID
+    * @param buffer_handle buffer_handle of the pose buffer
+    * @param configType pose config type
+    *
+    * @return error is NONE upon success
+    */
+    void setPoseConfig(in int dispId, in NativeHandle bufferHandle, in PoseConfigType configType);
 }

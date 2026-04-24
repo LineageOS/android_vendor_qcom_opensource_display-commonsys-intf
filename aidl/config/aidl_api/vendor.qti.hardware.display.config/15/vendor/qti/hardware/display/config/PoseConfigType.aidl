@@ -20,11 +20,9 @@
 // with such a backward incompatible change, it has a high risk of breaking
 // later when a module using the interface is updated, e.g., Mainline modules.
 
-package vendor.qti.hardware.display.composer3;
+package vendor.qti.hardware.display.config;
 @Backing(type="int") @VintfStability
-enum QtiLayerType {
-  UNKNOWN = 0,
-  APP = 1,
-  GAME = 2,
-  BROWSER = 3,
+enum PoseConfigType {
+  TEST = 0,
+  REAL = 1,
 }
