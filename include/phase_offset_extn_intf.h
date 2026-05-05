@@ -78,6 +78,8 @@ class PhaseOffsetExtnIntf {
   virtual int GetAdvancedSfOffsets(std::unordered_map<float, int64_t> *advancedSfOffsets) = 0;
   virtual int GetWorkDurationConfigs(std::unordered_map<float, std::pair<int64_t, int64_t>>
                                        *workDurationConfigs) = 0;
+  virtual int GetWorkDurationConfigsForPowerMode(
+      std::unordered_map<float, std::pair<int64_t, int64_t>> *psWorkDurationConfigs) = 0;
 
  protected:
   virtual ~PhaseOffsetExtnIntf() { }
