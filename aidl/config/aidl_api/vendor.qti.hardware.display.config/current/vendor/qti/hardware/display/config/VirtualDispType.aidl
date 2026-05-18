@@ -2,10 +2,10 @@
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  *//**
- * @file PoseConfigType.aidl
- * @brief Defines the different types of pose config test or real config
+ * @file VirtualDispType.aidl
+ * @brief Defines the virtual display types
  *
- * This enumeration states the different types of display ports supported.
+ * This enumeration specifies the different types of virtual displays.
  */
 ///////////////////////////////////////////////////////////////////////////////
 // THIS FILE IS IMMUTABLE. DO NOT EDIT IN ANY CASE.                          //
@@ -27,7 +27,7 @@
 
 package vendor.qti.hardware.display.config;
 @Backing(type="int") @VintfStability
-enum PoseConfigType {
-  TEST = 0,
-  REAL = 1,
+enum VirtualDispType {
+  DEFAULT = 0,
+  WITH_PQ = 1,
 }
