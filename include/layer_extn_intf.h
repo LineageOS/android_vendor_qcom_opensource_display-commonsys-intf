@@ -57,7 +57,9 @@ class LayerExtnIntf {
 
 #if CONCURRENCY_DETECTION_CONFIG == 1
   virtual void UpdateLayerState(const std::map<std::string, std::pair<int32_t, int32_t>>
-                                  &layerDispFrames) = 0;
+                                  &layerDispFrames,
+                                  const std::map<std::string, std::pair<int32_t, int32_t>> &layerSourceCrop,
+                                  const std::map<std::string, bool> &layerFocused) = 0;
 #else
   virtual void UpdateLayerState(const std::vector<std::string> &layers, int num_layers) = 0;
 #endif

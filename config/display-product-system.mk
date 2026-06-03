@@ -21,5 +21,6 @@ PRODUCT_PACKAGES += vendor.display.config@1.0 \
                     vendor.qti.hardware.display.config-V15-ndk \
                     vendor.qti.hardware.display.config-V16-ndk \
                     vendor.qti.hardware.display.config-V17-ndk \
+                    vendor.qti.hardware.display.config-V18-ndk \
                     vendor.qti.hardware.display.snapallocext-V1-ndk \
                     vendor.qti.hardware.qacs.ambientdatacapture-V1-ndk
