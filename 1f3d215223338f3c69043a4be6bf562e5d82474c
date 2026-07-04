@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "476687aa_12e58bce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2026-07-04T15:26:02Z",
+      "side": 1,
+      "message": "Maybe we can get rid of this now? What legacy hals are still not using this repo?",
+      "revId": "1f3d215223338f3c69043a4be6bf562e5d82474c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
