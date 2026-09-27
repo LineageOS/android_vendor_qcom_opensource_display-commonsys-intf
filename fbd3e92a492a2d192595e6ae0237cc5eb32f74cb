@@ -16,6 +16,24 @@
       "message": "seems sketchy",
       "revId": "fbd3e92a492a2d192595e6ae0237cc5eb32f74cb",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74b2c289_80a13c70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2026-09-27T22:24:14Z",
+      "side": 1,
+      "message": "Should be fine unless you are really unlucky? https://github.com/LineageOS/android_vendor_qcom_opensource_display-commonsys-intf/commits/fbd3e92a492a2d192595e6ae0237cc5eb32f74cb/gralloc/mapperInterfaces/CustomTuningMetadata.h",
+      "parentUuid": "67984dcb_2117c5ae",
+      "revId": "fbd3e92a492a2d192595e6ae0237cc5eb32f74cb",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
