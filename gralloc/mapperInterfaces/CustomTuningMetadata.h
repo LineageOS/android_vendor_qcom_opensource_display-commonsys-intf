@@ -16,8 +16,8 @@ typedef enum vendor_qti_hardware_display_common_CustomTuningMetadataFlags {
 typedef struct vendor_qti_hardware_display_common_CustomTuningMetadata {
   /** Payload size in bytes */
   uint32_t size;
-  uint8_t payload[QTI_CUSTOM_TUNING_METADATA_SIZE];
   vendor_qti_hardware_display_common_CustomTuningMetadataFlags flag;
+  uint8_t payload[QTI_CUSTOM_TUNING_METADATA_SIZE];
 } vendor_qti_hardware_display_common_CustomTuningMetadata;
 
 #endif  // __COMMON_CUSTOMTUNINGMETADATA_H__
